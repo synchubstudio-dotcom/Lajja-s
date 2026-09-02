@@ -51,7 +51,13 @@ export function generateProductSchema(product: Product) {
     "@context": "https://schema.org",
     "@type": "Product",
     name: product.name,
-    image: product.images.map((img) => img.url),
+    image: product.images.map((img) => ({
+      "@type": "ImageObject",
+      url: img.url,
+      ...(img.width ? { width: img.width } : {}),
+      ...(img.height ? { height: img.height } : {}),
+      caption: img.caption || img.alt,
+    })),
     description: product.description,
     sku: product.sku,
     brand: {

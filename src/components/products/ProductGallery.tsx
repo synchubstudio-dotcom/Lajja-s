@@ -24,6 +24,7 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
           alt={activeImage.alt || productName}
           fill
           priority
+          loading="eager"
           sizes="(max-width: 768px) 100vw, 50vw"
           className="object-cover"
         />
@@ -46,6 +47,7 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
                 src={img.url}
                 alt={img.alt}
                 fill
+                loading="lazy"
                 sizes="80px"
                 className="object-cover"
               />

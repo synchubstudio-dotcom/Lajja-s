@@ -38,8 +38,9 @@ export function CategoryBento() {
             >
               <Image
                 src={cat.heroImage}
-                alt={cat.name}
+                alt={`${cat.name} Gujarati snacks from Lajja's Foods`}
                 fill
+                loading={idx === 0 ? "eager" : "lazy"}
                 sizes="(max-width: 768px) 100vw, 33vw"
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
               />

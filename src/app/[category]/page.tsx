@@ -72,9 +72,10 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         <div className="relative rounded-3xl overflow-hidden bg-stone-900 text-white p-8 sm:p-12 lg:p-16 border border-stone-800 shadow-card">
           <Image
             src={category.heroImage}
-            alt={category.name}
+            alt={`${category.name} Gujarati snacks from Lajja's Foods`}
             fill
             priority
+            loading="eager"
             sizes="100vw"
             className="object-cover opacity-35"
           />
