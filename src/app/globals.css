@@ -4,8 +4,16 @@
 
 @layer base {
   :root {
-    --background: #fdfbf7;
-    --foreground: #1c1917;
+    --background: #f3efe8;
+    --foreground: #b1841f;
+    --brand-green: #1d5c3d;
+    --brand-green-deep: #113f2a;
+    --brand-gold: #d5b06a;
+    --panel-cream: #f6f1e9;
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 
   body {
@@ -18,6 +26,24 @@
 
   h1, h2, h3, h4, h5, h6 {
     letter-spacing: -0.02em;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
+
+@layer utilities {
+  .text-stone-900,
+  .text-stone-950 {
+    color: #b1841f;
+  }
+
+  [class~="text-[#1b1816]"],
+  [class~="text-[#1d1b1a]"],
+  [class~="text-[#1f1d1a]"],
+  [class~="text-[#2a2a2a]"] {
+    color: #b1841f;
   }
 }
 

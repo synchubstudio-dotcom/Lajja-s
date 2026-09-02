@@ -14,12 +14,12 @@ export const PRODUCTS: Product[] = [
     heritageStory: "Methi Thepla has sustained travelers across the arid landscapes of Gujarat for centuries. The naturally preservative properties of fenugreek, turmeric, and mustard oil allow these flatbreads to stay soft and fragrant for days on the go.",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=1200&q=80",
-        alt: "Freshly roasted Methi Thepla with spiced green fenugreek leaves served on a traditional plate",
+        url: "https://upload.wikimedia.org/wikipedia/commons/b/bc/Thepla_2.jpg",
+        alt: "Freshly roasted Methi Thepla stacked in a traditional plate",
         isPrimary: true
       },
       {
-        url: "https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=1200&q=80",
+        url: "https://upload.wikimedia.org/wikipedia/commons/7/7e/Masala_thepla_with_Methi_kela.JPG",
         alt: "Stack of vacuum sealed soft Methi Thepla ready for travel",
       }
     ],
@@ -103,7 +103,7 @@ export const PRODUCTS: Product[] = [
     heritageStory: "Masala theplas were historically crafted for long monsoon journeys across Saurashtra, using warming spices that stimulate digestion and preserve bread without chilling.",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1200&q=80",
+        url: "https://upload.wikimedia.org/wikipedia/commons/7/7e/Masala_thepla_with_Methi_kela.JPG",
         alt: "Spiced Masala Thepla stacked with cumin seeds and red spice flecks",
         isPrimary: true
       }
@@ -175,7 +175,7 @@ export const PRODUCTS: Product[] = [
     heritageStory: "In rural Saurashtra, mixing winter millets like bajra and jowar into daily theplas was the secret to day-long vigor in agricultural fields.",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=1200&q=80",
+        url: "https://upload.wikimedia.org/wikipedia/commons/7/74/Thepla_main.jpg",
         alt: "Multigrain Thepla made with five traditional Gujarati grains and fresh herbs",
         isPrimary: true
       }
@@ -245,7 +245,7 @@ export const PRODUCTS: Product[] = [
     heritageStory: "The simple Plain Thepla is the foundation of Gujarati domestic comfort, served from early dawn in every traditional household.",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=1200&q=80",
+        url: "https://upload.wikimedia.org/wikipedia/commons/4/42/Thepla_3.jpg",
         alt: "Golden Plain Thepla folded with ajwain seeds and turmeric aroma",
         isPrimary: true
       }
@@ -314,7 +314,7 @@ export const PRODUCTS: Product[] = [
     heritageStory: "Jeera has always been Gujarat’s most prized digestive spice, cultivated extensively across Unjha and North Gujarat.",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=1200&q=80",
+        url: "https://upload.wikimedia.org/wikipedia/commons/d/d6/Thepla_4.jpg",
         alt: "Aromatic Jeera Thepla studded with roasted cumin seeds",
         isPrimary: true
       }
@@ -385,7 +385,7 @@ export const PRODUCTS: Product[] = [
     heritageStory: "Khakhra was historically created in Gujarati homes to transform leftover chapati dough into a long-lasting, crisp traveling wafer that would never spoil in the desert heat.",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=1200&q=80",
+        url: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Khakhra.JPG",
         alt: "Crisp golden Methi Khakhra discs stacked on a wooden board with fenugreek aroma",
         isPrimary: true
       }
@@ -457,7 +457,7 @@ export const PRODUCTS: Product[] = [
     heritageStory: "Masala khakhra is Gujarat’s favorite tea-time crunch, capturing the spirit of Ahmedabad’s bustling street snack culture.",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=1200&q=80",
+        url: "https://upload.wikimedia.org/wikipedia/commons/4/45/Khakhra_Varities.jpg",
         alt: "Golden crispy Masala Khakhra with red spice blend and cumin seeds",
         isPrimary: true
       }
@@ -526,7 +526,7 @@ export const PRODUCTS: Product[] = [
     heritageStory: "An integral breakfast staple across Jain ascetic and pilgrim traditions for its purity and longevity.",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=1200&q=80",
+        url: "https://upload.wikimedia.org/wikipedia/commons/a/ad/Khakhras.jpg",
         alt: "Clean toasted Plain Khakhra disc with golden turmeric hues",
         isPrimary: true
       }
@@ -597,7 +597,7 @@ export const PRODUCTS: Product[] = [
     heritageStory: "For over 200 years, Bharuch railway station and the Narmada riverbank have been the birthplace of India's most celebrated salted peanuts.",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=1200&q=80",
+        url: "https://upload.wikimedia.org/wikipedia/commons/3/36/Roasted_Peanuts_with_shell.jpg",
         alt: "Golden Bharuchi Khari Sing jumbo salted groundnuts in earthen bowl",
         isPrimary: true
       }
@@ -667,7 +667,7 @@ export const PRODUCTS: Product[] = [
     heritageStory: "Roasted chana has been the powerhouse snack of Gujarati farmers and scholars for its unmatched low-glycemic plant protein.",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=1200&q=80",
+        url: "https://upload.wikimedia.org/wikipedia/commons/3/30/Roasted_Chickpea_Chana_with_Salt_and_Turmeric.jpg",
         alt: "Golden spiced Roasted Masala Chana with aromatic black salt and cumin",
         isPrimary: true
       }
@@ -738,7 +738,7 @@ export const PRODUCTS: Product[] = [
     heritageStory: "Hing and Jeera are revered in Ayurvedic Gujarati cooking for balancing gastric agni and enhancing the nutty richness of peanuts.",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?auto=format&fit=crop&w=1200&q=80",
+        url: "https://upload.wikimedia.org/wikipedia/commons/e/e7/Dry_Roasted_Virginia_Peanuts.jpg",
         alt: "Crispy golden roasted peanuts dusted with aromatic hing and jeera powder",
         isPrimary: true
       }
@@ -807,7 +807,7 @@ export const PRODUCTS: Product[] = [
     heritageStory: "Saurashtra’s black cotton soil gives these nuts an inherent sweetness that needs nothing more than pure salt to shine.",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?auto=format&fit=crop&w=1200&q=80",
+        url: "https://upload.wikimedia.org/wikipedia/commons/4/48/Roasted_peanuts_2.jpg",
         alt: "Classic golden roasted peanut kernels sprinkled with crystal salt",
         isPrimary: true
       }
@@ -878,7 +878,7 @@ export const PRODUCTS: Product[] = [
     heritageStory: "Across Ahmedabad, Vadodara, and Surat, morning chai is incomplete without hot thepla and crisp khakhra shared among family.",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=1200&q=80",
+        url: "https://upload.wikimedia.org/wikipedia/commons/4/45/Khakhra_Varities.jpg",
         alt: "Gujarati Breakfast Combo hamper box with fresh theplas, khakhras, and pickle",
         isPrimary: true
       }
@@ -947,7 +947,7 @@ export const PRODUCTS: Product[] = [
     heritageStory: "Gujarati travelers are famous worldwide for carrying their beloved home snacks across the globe, ensuring comfort and vegetarian purity anywhere.",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=1200&q=80",
+        url: "https://upload.wikimedia.org/wikipedia/commons/7/74/Thepla_main.jpg",
         alt: "Gujarati Travel Snack Combo in travel-tested packaging",
         isPrimary: true
       }
@@ -1016,7 +1016,7 @@ export const PRODUCTS: Product[] = [
     heritageStory: "Created to embody the joyful generosity of Gujarati joint-family gatherings, where every member has their favorite snack.",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=1200&q=80",
+        url: "https://upload.wikimedia.org/wikipedia/commons/4/45/Khakhra_Varities.jpg",
         alt: "Lajja’s Grand Family Gujarati Snack Hamper Box filled with assorted savory snacks",
         isPrimary: true
       }

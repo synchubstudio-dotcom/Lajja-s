@@ -50,10 +50,10 @@ export function Header() {
   return (
     <>
       {/* Top Notification Announcement Bar */}
-      <div className="bg-terracotta-900 text-terracotta-50 text-[11px] sm:text-xs py-1.5 px-4 font-medium">
+      <div className="bg-[#1f5a3d] text-[#ecf7ef] text-[11px] sm:text-xs py-1.5 px-4 font-medium">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className="bg-kesari-500 text-stone-950 font-bold px-1.5 py-0.2 rounded text-[10px] uppercase">
+            <span className="bg-[#d7b16b] text-[#1a2a1d] font-bold px-1.5 py-0.2 rounded text-[10px] uppercase">
               Fresh Daily
             </span>
             <span className="hidden sm:inline">
@@ -67,14 +67,14 @@ export function Header() {
           <div className="flex items-center gap-4">
             <Link
               href="/combo-packs/travel-combo/"
-              className="text-kesari-300 hover:text-white flex items-center gap-1 transition-colors"
+              className="text-[#f2d69d] hover:text-white flex items-center gap-1 transition-colors"
             >
-              <Sparkles className="w-3 h-3 text-kesari-400" />
+              <Sparkles className="w-3 h-3 text-[#f7d68d]" />
               <span>International Travel Packs</span>
             </Link>
             <a
               href={`tel:${SITE_CONFIG.contact.phone}`}
-              className="hidden md:flex items-center gap-1 text-stone-300 hover:text-white"
+              className="hidden md:flex items-center gap-1 text-stone-200 hover:text-white"
             >
               <Phone className="w-3 h-3" />
               <span>{SITE_CONFIG.contact.phone}</span>
@@ -101,10 +101,10 @@ export function Header() {
             {/* Brand Logo & Tagline */}
             <div className="flex items-center gap-4">
               <Link href="/" className="group flex flex-col">
-                <span className="text-2xl sm:text-3xl font-extrabold font-serif tracking-tight text-terracotta-800 group-hover:text-kesari-700 transition-colors">
+                <span className="text-2xl sm:text-3xl font-extrabold font-serif tracking-tight text-[#1f5a3d] group-hover:text-[#163f2f] transition-colors">
                   {SITE_CONFIG.name}
                 </span>
-                <span className="text-[10px] tracking-widest uppercase font-semibold text-kesari-700 -mt-1 font-sans">
+                <span className="text-[10px] tracking-widest uppercase font-semibold text-[#d7b16b] -mt-1 font-sans">
                   Authentic Gujarati Delicacies
                 </span>
               </Link>
@@ -113,14 +113,14 @@ export function Header() {
             {/* Desktop Navigation Links */}
             <nav
               aria-label="Main Navigation"
-              className="hidden lg:flex items-center gap-6 xl:gap-8"
+              className="hidden lg:flex items-center gap-6 xl:gap-8 text-[#2a2a2a]"
             >
               <Link
                 href="/"
                 className={`text-sm font-semibold transition-colors py-2 ${
                   pathname === "/"
-                    ? "text-terracotta-800 border-b-2 border-terracotta-700 font-bold"
-                    : "text-stone-700 hover:text-terracotta-700"
+                    ? "text-[#214f3a] border-b-2 border-[#214f3a] font-bold"
+                    : "text-stone-700 hover:text-[#214f3a] hover:bg-[#f6f0e5] px-2 rounded-md"
                 }`}
               >
                 Home
@@ -134,15 +134,15 @@ export function Header() {
               >
                 <Link
                   href="/products/all-products/"
-                  className={`text-sm font-semibold transition-colors flex items-center gap-1 py-2 ${
+                  className={`text-sm font-semibold transition-colors flex items-center gap-1 py-2 px-2 rounded-md ${
                     pathname.startsWith("/products") ||
                     pathname.startsWith("/thepla") ||
                     pathname.startsWith("/khakhra") ||
                     pathname.startsWith("/khari-sing") ||
                     pathname.startsWith("/roasted-peanuts") ||
                     pathname.startsWith("/combo-packs")
-                      ? "text-terracotta-800 font-bold border-b-2 border-terracotta-700"
-                      : "text-stone-700 hover:text-terracotta-700"
+                      ? "text-[#214f3a] font-bold border-b-2 border-[#214f3a]"
+                      : "text-stone-700 hover:text-[#214f3a] hover:bg-[#f6f0e5]"
                   }`}
                   aria-expanded={isMegaOpen}
                 >

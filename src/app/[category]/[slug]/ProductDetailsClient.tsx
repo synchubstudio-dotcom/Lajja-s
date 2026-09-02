@@ -42,61 +42,54 @@ export function ProductDetailsClient({ product }: ProductDetailsClientProps) {
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-      {/* Product Image Gallery */}
+    <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-12 lg:gap-12">
       <div className="lg:col-span-6">
         <ProductGallery images={product.images} productName={product.name} />
       </div>
 
-      {/* Product Buy Box & Options */}
-      <div className="lg:col-span-6 space-y-6">
+      <div className="lg:col-span-6 space-y-5">
         <div>
-          {/* Category & Gujarati Tag */}
-          <div className="flex items-center gap-2 mb-2">
+          <div className="mb-2 flex items-center gap-2">
             <Link
               href={`/${product.categorySlug}/`}
-              className="text-xs font-bold uppercase tracking-wider text-terracotta-700 hover:underline"
+              className="text-xs font-bold uppercase tracking-wider text-[#1f5a3d] hover:underline"
             >
               {product.categoryName}
             </Link>
             {product.gujaratiName && (
-              <span className="text-xs font-serif font-bold text-kesari-700 bg-kesari-100/70 px-2 py-0.5 rounded-md">
+              <span className="rounded-md bg-[#f1e5c8] px-2 py-0.5 text-xs font-serif font-bold text-[#2b6d47]">
                 {product.gujaratiName}
               </span>
             )}
           </div>
 
-          {/* Product H1 */}
-          <h1 className="text-3xl sm:text-4xl font-extrabold font-serif text-stone-900 leading-tight">
+          <h1 className="font-serif text-4xl font-extrabold leading-tight text-[#1d1b1a] sm:text-5xl">
             {product.name}
           </h1>
 
-          {/* Rating & Short Review Meta */}
-          <div className="flex items-center gap-3 mt-2.5 text-xs text-stone-600">
-            <div className="flex items-center gap-1 text-kesari-600 font-bold">
-              <Star className="w-4 h-4 fill-kesari-500 text-kesari-500" />
+          <div className="mt-3 flex items-center gap-3 text-xs text-stone-600">
+            <div className="flex items-center gap-1 font-bold text-[#d7b16b]">
+              <Star className="h-4 w-4 fill-current" />
               <span className="text-stone-900">{product.rating}</span>
             </div>
             <span>•</span>
-            <span className="text-stone-500">
-              <strong>{product.reviewCount}</strong> Verified Customer Reviews
+            <span>
+              <strong>{product.reviewCount}</strong> reviews
             </span>
             <span>•</span>
-            <span className="text-herbal-700 font-semibold flex items-center gap-1">
-              <CheckCircle2 className="w-3.5 h-3.5" /> In Stock
+            <span className="flex items-center gap-1 font-semibold text-[#1f5a3d]">
+              <CheckCircle2 className="h-3.5 w-3.5" /> In Stock
             </span>
           </div>
 
-          {/* Short Lead Description */}
-          <p className="text-sm text-stone-600 mt-3 leading-relaxed">
+          <p className="mt-3 text-sm leading-relaxed text-stone-600">
             {product.shortDescription}
           </p>
         </div>
 
-        {/* Pricing Box */}
-        <div className="bg-white p-4 sm:p-5 rounded-2xl border border-stone-200 shadow-2xs space-y-4">
+        <div className="space-y-4 rounded-[18px] border border-[#e6dfd3] bg-[#fffdf9] p-4 sm:p-5">
           <div className="flex items-baseline gap-3">
-            <span className="text-3xl font-extrabold font-serif text-stone-900">
+            <span className="font-serif text-4xl font-extrabold text-[#1d1b1a]">
               {formatPrice(selectedPack.price * quantity)}
             </span>
             {selectedPack.compareAtPrice && (
@@ -105,18 +98,17 @@ export function ProductDetailsClient({ product }: ProductDetailsClientProps) {
               </span>
             )}
             {discountPercent > 0 && (
-              <span className="text-xs font-bold text-herbal-800 bg-herbal-100 px-2.5 py-0.5 rounded-full">
-                Save {discountPercent}% OFF
+              <span className="rounded-full bg-[#edf5ee] px-2.5 py-0.5 text-[10px] font-bold text-[#1f5a3d]">
+                Save {discountPercent}%
               </span>
             )}
           </div>
 
-          {/* Pack Options Selector */}
           <div>
-            <label className="block text-xs font-bold uppercase text-stone-700 mb-2">
-              Choose Pack Size:
+            <label className="mb-2 block text-[11px] font-bold uppercase tracking-wide text-stone-700">
+              Pack Size
             </label>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+            <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-3">
               {product.packOptions.map((pack, idx) => {
                 const isSelected = selectedPackIndex === idx;
                 return (
@@ -124,16 +116,14 @@ export function ProductDetailsClient({ product }: ProductDetailsClientProps) {
                     key={pack.sku}
                     type="button"
                     onClick={() => setSelectedPackIndex(idx)}
-                    className={`p-3 rounded-xl border text-left transition-all ${
+                    className={`rounded-xl border p-3 text-left transition-all ${
                       isSelected
-                        ? "bg-terracotta-50/70 border-terracotta-600 ring-2 ring-terracotta-200"
-                        : "bg-stone-50 border-stone-200 hover:border-stone-300"
+                        ? "border-[#1f5a3d] bg-[#eef5f1] ring-2 ring-[#dfeae3]"
+                        : "border-[#e7dfd2] bg-[#f9f7f3] hover:border-[#d2c8ba]"
                     }`}
                   >
-                    <span className="block text-xs font-bold text-stone-900">
-                      {pack.size}
-                    </span>
-                    <span className="block text-xs text-terracotta-700 font-extrabold font-serif mt-1">
+                    <span className="block text-xs font-bold text-stone-900">{pack.size}</span>
+                    <span className="mt-1 block font-serif text-base font-extrabold text-[#1f5a3d]">
                       {formatPrice(pack.price)}
                     </span>
                   </button>
@@ -142,51 +132,47 @@ export function ProductDetailsClient({ product }: ProductDetailsClientProps) {
             </div>
           </div>
 
-          {/* Quantity Stepper */}
-          <div className="flex items-center gap-4 pt-2">
-            <label className="text-xs font-bold uppercase text-stone-700">
-              Quantity:
+          <div className="flex items-center gap-4 pt-1">
+            <label className="text-[11px] font-bold uppercase tracking-wide text-stone-700">
+              Quantity
             </label>
-            <div className="flex items-center border border-stone-300 rounded-xl bg-stone-50 overflow-hidden">
+            <div className="flex items-center overflow-hidden rounded-lg border border-stone-300 bg-stone-50">
               <button
                 type="button"
                 onClick={() => setQuantity(Math.max(1, quantity - 1))}
                 className="p-2.5 text-stone-600 hover:bg-stone-200/60"
                 aria-label="Decrease quantity"
               >
-                <Minus className="w-3.5 h-3.5" />
+                <Minus className="h-3.5 w-3.5" />
               </button>
-              <span className="px-4 text-xs font-bold text-stone-900">
-                {quantity}
-              </span>
+              <span className="px-4 text-xs font-bold text-stone-900">{quantity}</span>
               <button
                 type="button"
                 onClick={() => setQuantity(quantity + 1)}
                 className="p-2.5 text-stone-600 hover:bg-stone-200/60"
                 aria-label="Increase quantity"
               >
-                <Plus className="w-3.5 h-3.5" />
+                <Plus className="h-3.5 w-3.5" />
               </button>
             </div>
           </div>
 
-          {/* CTAs */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+          <div className="grid grid-cols-1 gap-3 pt-1 sm:grid-cols-2">
             <button
               type="button"
               onClick={handleAddToCart}
-              className="w-full py-3.5 px-4 bg-terracotta-700 hover:bg-terracotta-800 active:scale-95 text-white font-bold text-xs sm:text-sm rounded-xl shadow-card transition-all flex items-center justify-center gap-2"
+              className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#214f3a] px-4 py-3.5 text-xs font-bold text-white shadow-sm transition hover:bg-[#183f2e]"
             >
-              <ShoppingBag className="w-4 h-4" />
+              <ShoppingBag className="h-4 w-4" />
               <span>Add to Cart</span>
             </button>
             <button
               type="button"
               onClick={handleBuyNow}
-              className="w-full py-3.5 px-4 bg-stone-900 hover:bg-stone-800 active:scale-95 text-white font-bold text-xs sm:text-sm rounded-xl shadow-xs transition-all flex items-center justify-center gap-2"
+              className="flex w-full items-center justify-center gap-2 rounded-xl border border-[#d9d1c3] bg-white px-4 py-3.5 text-xs font-bold text-[#1d1b1a] transition hover:bg-[#f5f1ea]"
             >
-              <Zap className="w-4 h-4 text-kesari-400" />
-              <span>Buy Now (Express)</span>
+              <Zap className="h-4 w-4 text-[#d7b16b]" />
+              <span>Buy Now</span>
             </button>
           </div>
         </div>
