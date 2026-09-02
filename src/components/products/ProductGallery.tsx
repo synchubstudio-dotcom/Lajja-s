@@ -18,32 +18,27 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
 
   return (
     <div className="flex flex-col gap-4">
-      {/* Main Large Image Container */}
-      <div className="relative aspect-4/3 sm:aspect-square w-full rounded-2xl overflow-hidden bg-stone-100 border border-stone-200 shadow-sm">
+      <div className="relative aspect-[1.15/1] w-full overflow-hidden rounded-[16px] border border-[#e5ddd0] bg-[#f2ecdf] shadow-sm">
         <Image
           src={activeImage.url}
           alt={activeImage.alt || productName}
           fill
           priority
           sizes="(max-width: 768px) 100vw, 50vw"
-          className="object-cover transition-all duration-300"
+          className="object-cover"
         />
-        <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-xs text-[10px] font-bold text-stone-800 uppercase px-2.5 py-1 rounded-md shadow-xs">
-          Authentic Gujarati Craft
-        </div>
       </div>
 
-      {/* Thumbnails Row (if multiple images exist) */}
       {images.length > 1 && (
         <div className="flex gap-3 overflow-x-auto pb-2">
           {images.map((img, idx) => (
             <button
-              key={img.url}
+              key={img.url + idx}
               onClick={() => setActiveImageIndex(idx)}
-              className={`relative w-20 h-20 rounded-xl overflow-hidden bg-stone-100 border-2 shrink-0 transition-all ${
+              className={`relative h-20 w-20 shrink-0 overflow-hidden rounded-xl border-2 bg-stone-100 transition-all ${
                 activeImageIndex === idx
-                  ? "border-terracotta-700 ring-2 ring-terracotta-200"
-                  : "border-stone-200 opacity-70 hover:opacity-100"
+                  ? "border-[#245a3d] ring-2 ring-[#dfeae3]"
+                  : "border-[#e7dfd2] opacity-70 hover:opacity-100"
               }`}
               aria-label={`View ${productName} image ${idx + 1}`}
             >
