@@ -31,39 +31,47 @@ cloudinary.config({
 
 const client = new MongoClient(mongodbUri);
 
-try {
-  await client.connect();
-  const collection = client.db(mongodbDb).collection("products");
+async function migrateProducts() {
+  try {
+    await client.connect();
+    const collection = client.db(mongodbDb).collection("products");
 
-  for (const product of PRODUCTS) {
-    const images = [];
-    for (const [index, image] of product.images.entries()) {
-      const upload = await cloudinary.uploader.upload(image.url, {
-        folder: `lajjas-foods/products/${product.slug}`,
-        public_id: index === 0 ? "primary" : `gallery-${index + 1}`,
-        overwrite: true,
-        resource_type: "image",
-      });
+    for (const product of PRODUCTS) {
+      const images = [];
+      for (const [index, image] of product.images.entries()) {
+        const upload = await cloudinary.uploader.upload(image.url, {
+          folder: `lajjas-foods/products/${product.slug}`,
+          public_id: index === 0 ? "primary" : `gallery-${index + 1}`,
+          overwrite: true,
+          resource_type: "image",
+        });
 
-      images.push({
-        url: upload.secure_url,
-        publicId: upload.public_id,
-        format: upload.format,
-        width: upload.width,
-        height: upload.height,
-        alt: image.alt,
-        caption: image.caption || image.alt,
-        isPrimary: Boolean(image.isPrimary),
-      });
+        images.push({
+          url: upload.secure_url,
+          publicId: upload.public_id,
+          format: upload.format,
+          width: upload.width,
+          height: upload.height,
+          alt: image.alt,
+          caption: image.caption || image.alt,
+          isPrimary: Boolean(image.isPrimary),
+        });
+      }
+
+      await collection.updateOne(
+        { slug: product.slug },
+        { $set: { ...product, images, migratedAt: new Date() } },
+        { upsert: true },
+      );
+      console.log(`Migrated ${product.name}`);
     }
-
-    await collection.updateOne(
-      { slug: product.slug },
-      { $set: { ...product, images, migratedAt: new Date() } },
-      { upsert: true },
-    );
-    console.log(`Migrated ${product.name}`);
+  } finally {
+    await client.close();
   }
-} finally {
-  await client.close();
 }
+
+migrateProducts().catch((error: unknown) => {
+  console.error("Product migration failed.");
+  console.error(error);
+  process.exitCode = 1;
+});
