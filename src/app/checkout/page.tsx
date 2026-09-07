@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { 
@@ -11,12 +11,14 @@ import {
   QrCode, 
   Banknote, 
   ArrowRight, 
-  ShoppingBag 
+  ShoppingBag,
+  MessageCircle
 } from "lucide-react";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { useCartStore } from "@/store/cartStore";
 import { formatPrice } from "@/lib/utils";
 import { Order } from "@/types/order";
+import { SITE_CONFIG } from "@/lib/constants";
 
 export default function CheckoutPage() {
   const { items, clearCart, coupon, getTotals } = useCartStore();
@@ -37,6 +39,7 @@ export default function CheckoutPage() {
   const [paymentMethod, setPaymentMethod] = useState<"cod" | "upi" | "card">("upi");
   const [isProcessing, setIsProcessing] = useState(false);
   const [completedOrder, setCompletedOrder] = useState<Order | null>(null);
+  const checkoutFormRef = useRef<HTMLFormElement>(null);
 
   if (items.length === 0 && !completedOrder) {
     return (
@@ -68,7 +71,7 @@ export default function CheckoutPage() {
         items: [...items],
         shippingAddress: { ...formData },
         paymentMethod,
-        paymentStatus: paymentMethod === "cod" ? "pending" : "paid",
+        paymentStatus: "pending",
         subtotal: totals.subtotal,
         discount: totals.discount,
         shippingFee: totals.shipping,
@@ -89,6 +92,46 @@ export default function CheckoutPage() {
       setCompletedOrder(newOrder);
       setIsProcessing(false);
     }, 1200);
+  };
+
+  const handleWhatsAppOrder = () => {
+    if (!checkoutFormRef.current?.reportValidity()) return;
+
+    const phoneNumber = SITE_CONFIG.contact.whatsapp.replace(/\D/g, "");
+    const itemLines = items
+      .map(
+        (item) =>
+          `• ${item.name} (${item.packOption.size}) x${item.quantity} - ${formatPrice(
+            item.packOption.price * item.quantity
+          )}`
+      )
+      .join("\n");
+    const address = [
+      formData.fullName,
+      formData.phone,
+      formData.addressLine1,
+      formData.addressLine2,
+      formData.landmark ? `Near ${formData.landmark}` : "",
+      `${formData.city}, ${formData.state} - ${formData.pincode}`,
+    ]
+      .filter(Boolean)
+      .join(", ");
+    const message = [
+      "Hello Lajja's Foods, I would like to place an order on WhatsApp.",
+      "",
+      "Items:",
+      itemLines,
+      "",
+      `Subtotal: ${formatPrice(totals.subtotal)}`,
+      `Discount: ${formatPrice(totals.discount)}`,
+      `Delivery: ${totals.shipping === 0 ? "FREE" : formatPrice(totals.shipping)}`,
+      `Grand Total: ${formatPrice(totals.total)}`,
+      "",
+      `Delivery address: ${address}`,
+      `Preferred payment: ${paymentMethod.toUpperCase()} (payment confirmation pending)`,
+    ].join("\n");
+
+    window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
   };
 
   // Order Success Screen
@@ -171,7 +214,7 @@ export default function CheckoutPage() {
           </p>
         </div>
 
-        <form onSubmit={handlePlaceOrder} className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <form ref={checkoutFormRef} onSubmit={handlePlaceOrder} className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Left Column: Delivery Address & Payment */}
           <div className="lg:col-span-7 space-y-8">
             {/* 1. Address Box */}
@@ -312,6 +355,9 @@ export default function CheckoutPage() {
                     <span className="block font-bold text-xs text-stone-900">UPI Instant</span>
                     <span className="text-[11px] text-stone-500">GPay, PhonePe, Paytm</span>
                   </div>
+                  <p className="text-xs text-stone-500">
+                    Online payment is currently pending until payment gateway integration is completed. We will confirm payment with you.
+                  </p>
                 </button>
 
                 <button
@@ -412,6 +458,17 @@ export default function CheckoutPage() {
                   </>
                 )}
               </button>
+              <button
+                type="button"
+                onClick={handleWhatsAppOrder}
+                className="w-full py-3.5 border border-[#2d7b4d] bg-[#edf5ee] hover:bg-[#f6f0e5] text-[#1f5a3d] font-bold text-sm rounded-xl transition-all flex items-center justify-center gap-2"
+              >
+                <MessageCircle className="w-4 h-4" />
+                <span>Place Order on WhatsApp</span>
+              </button>
+              <p className="text-center text-[11px] text-stone-500">
+                Your cart, delivery address, and total will open in WhatsApp for confirmation.
+              </p>
             </div>
           </div>
         </form>
