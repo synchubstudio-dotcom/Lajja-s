@@ -3,7 +3,7 @@ export const SITE_CONFIG = {
   tagline: "Authentic Gujarati Snacks Made with Tradition",
   description: "Order authentic handcrafted Gujarati Thepla, Khakhra, Bharuchi Khari Sing, and Roasted Peanuts online. Vacuum sealed for long-lasting travel freshness.",
   url: "https://lajjasfoods.com",
-  ogImage: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=1200&q=80",
+  ogImage: "https://upload.wikimedia.org/wikipedia/commons/7/74/Thepla_main.jpg",
   contact: {
     phone: "+91 98765 43210",
     whatsapp: "+91 98765 43210",
@@ -68,7 +68,7 @@ export const NAV_LINKS = [
         href: "/thepla/",
         slug: "thepla",
         tagline: "Soft, spiced Gujarati flatbreads",
-        image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=400&q=80",
+        image: "https://upload.wikimedia.org/wikipedia/commons/7/74/Thepla_main.jpg",
         items: [
           { name: "Methi Thepla", href: "/thepla/methi-thepla/" },
           { name: "Masala Thepla", href: "/thepla/masala-thepla/" },
@@ -82,7 +82,7 @@ export const NAV_LINKS = [
         href: "/khakhra/",
         slug: "khakhra",
         tagline: "Crisp hand-pressed roasted wafers",
-        image: "https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=400&q=80",
+        image: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Khakhra.JPG",
         items: [
           { name: "Methi Khakhra", href: "/khakhra/methi-khakhra/" },
           { name: "Masala Khakhra", href: "/khakhra/masala-khakhra/" },
@@ -94,7 +94,7 @@ export const NAV_LINKS = [
         href: "/khari-sing-chana/",
         slug: "khari-sing-chana",
         tagline: "Bharuchi salted peanuts & roasted chana",
-        image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=400&q=80",
+        image: "https://upload.wikimedia.org/wikipedia/commons/3/36/Roasted_Peanuts_with_shell.jpg",
         items: [
           { name: "Bharuchi Salted Khari Sing", href: "/khari-sing-chana/salted-khari-sing/" },
           { name: "Roasted Masala Chana", href: "/khari-sing-chana/masala-chana/" },
@@ -105,7 +105,7 @@ export const NAV_LINKS = [
         href: "/roasted-peanuts/",
         slug: "roasted-peanuts",
         tagline: "Slow-roasted Saurashtra groundnuts",
-        image: "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?auto=format&fit=crop&w=400&q=80",
+        image: "https://upload.wikimedia.org/wikipedia/commons/4/48/Roasted_peanuts_2.jpg",
         items: [
           { name: "Hing Jeera Peanuts", href: "/roasted-peanuts/hing-jeera-peanuts/" },
           { name: "Classic Salted Peanuts", href: "/roasted-peanuts/classic-salted-peanuts/" },
@@ -116,7 +116,7 @@ export const NAV_LINKS = [
         href: "/combo-packs/",
         slug: "combo-packs",
         tagline: "Curated breakfast & travel snack hampers",
-        image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80",
+        image: "https://upload.wikimedia.org/wikipedia/commons/4/45/Khakhra_Varities.jpg",
         items: [
           { name: "Breakfast Combo", href: "/combo-packs/breakfast-combo/" },
           { name: "Travel Combo (Flight Ready)", href: "/combo-packs/travel-combo/" },

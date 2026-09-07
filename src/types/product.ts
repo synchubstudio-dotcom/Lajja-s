@@ -48,6 +48,9 @@ export interface Product {
     url: string;
     alt: string;
     isPrimary?: boolean;
+    width?: number;
+    height?: number;
+    caption?: string;
   }[];
   price: number; // Base price for default pack
   compareAtPrice?: number;

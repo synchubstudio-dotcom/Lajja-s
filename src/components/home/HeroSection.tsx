@@ -59,6 +59,7 @@ export function HeroSection() {
                   width={1200}
                   height={900}
                   priority
+                  loading="eager"
                   className="h-[340px] w-full rounded-[18px] object-cover object-center sm:h-[420px] lg:h-[500px]"
                 />
               </div>
