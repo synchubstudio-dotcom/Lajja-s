@@ -2,11 +2,11 @@ export const SITE_CONFIG = {
   name: "Lajja’s Foods",
   tagline: "Authentic Gujarati Snacks Made with Tradition",
   description: "Order authentic handcrafted Gujarati Thepla, Khakhra, Bharuchi Khari Sing, and Roasted Peanuts online. Vacuum sealed for long-lasting travel freshness.",
-  url: "https://lajjasfoods.com",
+  url: "https://lajja-s.vercel.app",
   ogImage: "https://upload.wikimedia.org/wikipedia/commons/7/74/Thepla_main.jpg",
   contact: {
-    phone: "+91 98765 43210",
-    whatsapp: "+91 98765 43210",
+    phone: "+91 9023863715",
+    whatsapp: "+91 9023863715",
     email: "care@lajjasfoods.com",
     address: {
       street: "Plot 14, Heritage Food Estate, Near Old Padra Road",
