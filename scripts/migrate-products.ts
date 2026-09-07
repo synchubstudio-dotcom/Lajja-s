@@ -1,7 +1,11 @@
-import "dotenv/config";
+import dotenv from "dotenv";
+import dns from "node:dns";
 import { MongoClient } from "mongodb";
 import { v2 as cloudinary } from "cloudinary";
 import { PRODUCTS } from "../src/data/products";
+
+dotenv.config({ path: ".env" });
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
 
 const required = [
   "MONGODB_URI",
