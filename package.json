@@ -8,12 +8,14 @@
     "start": "next start -p 3005",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "migrate:products": "tsx scripts/migrate-products.ts"
-    ,"seed:admin": "tsx scripts/seed-admin.ts"
+    "migrate:products": "tsx scripts/migrate-products.ts",
+    "seed:admin": "tsx scripts/seed-admin.ts"
   },
   "dependencies": {
     "cloudinary": "^2.5.1",
+    "bcryptjs": "^3.0.2",
     "clsx": "^2.1.1",
+    "jose": "^6.0.10",
     "lucide-react": "^0.475.0",
     "mongodb": "^6.13.0",
     "next": "^15.1.12",
