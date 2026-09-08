@@ -2,8 +2,10 @@ import { MongoClient } from "mongodb";
 import "dotenv/config";
 import * as dns from "node:dns";
 
-dns.setServers(["8.8.8.8", "8.8.4.4"]);
-dns.promises.setServers(["8.8.8.8", "8.8.4.4"]);
+if (process.env.NODE_ENV !== "production") {
+  dns.setServers(["8.8.8.8", "8.8.4.4"]);
+  dns.promises.setServers(["8.8.8.8", "8.8.4.4"]);
+}
 
 const uri = process.env.MONGODB_URI;
 if (!uri) throw new Error("Missing MONGODB_URI.");

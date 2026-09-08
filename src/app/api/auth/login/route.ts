@@ -15,6 +15,9 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: true, role: user.role });
   } catch (error) {
     console.error("Login request failed:", error);
-    return NextResponse.json({ message: "Unable to sign in right now. Check the server configuration." }, { status: 500 });
+    const message = error instanceof Error && error.message.startsWith("Missing ")
+      ? "Authentication is not configured on the server."
+      : "Unable to sign in right now. Check the server configuration.";
+    return NextResponse.json({ message }, { status: 500 });
   }
 }
