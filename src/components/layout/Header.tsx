@@ -24,10 +24,16 @@ export function Header() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [hasHydrated, setHasHydrated] = useState(false);
   const megaTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const itemCount = useCartStore((state) => state.getItemCount());
+  const persistedItemCount = useCartStore((state) => state.getItemCount());
+  const itemCount = hasHydrated ? persistedItemCount : 0;
   const setDrawerOpen = useCartStore((state) => state.setDrawerOpen);
+
+  useEffect(() => {
+    setHasHydrated(true);
+  }, []);
 
   const handleMouseEnter = () => {
     if (megaTimeoutRef.current) clearTimeout(megaTimeoutRef.current);

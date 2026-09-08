@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { PRODUCTS } from "@/data/products";
+import { getCatalogProducts } from "@/lib/product-catalog";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -7,7 +7,7 @@ export async function GET(request: Request) {
   const query = searchParams.get("q")?.toLowerCase();
   const featured = searchParams.get("featured");
 
-  let result = [...PRODUCTS];
+  let result = await getCatalogProducts();
 
   if (category) {
     result = result.filter((p) => p.categorySlug === category);

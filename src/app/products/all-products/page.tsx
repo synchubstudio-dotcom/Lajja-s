@@ -6,6 +6,9 @@ import { constructMetadata } from "@/lib/seo";
 import { generateItemListSchema } from "@/lib/schema";
 import { PRODUCTS } from "@/data/products";
 import { AllProductsClient } from "./AllProductsClient";
+import { getCatalogProducts } from "@/lib/product-catalog";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = constructMetadata({
   title: "All Products | Buy Authentic Gujarati Snacks Online",
@@ -13,10 +16,11 @@ export const metadata: Metadata = constructMetadata({
   canonicalUrl: "https://lajjasfoods.com/products/all-products/",
 });
 
-export default function AllProductsPage() {
+export default async function AllProductsPage() {
+  const products = await getCatalogProducts();
   const itemListSchema = generateItemListSchema(
     "Lajja's Foods - All Gujarati Snacks",
-    PRODUCTS.map((p) => ({
+    products.map((p) => ({
       name: p.name,
       url: `https://lajjasfoods.com/${p.categorySlug}/${p.slug}/`,
     }))
@@ -42,7 +46,7 @@ export default function AllProductsPage() {
         </div>
 
         {/* Interactive Filter & Product Catalogue */}
-        <AllProductsClient products={PRODUCTS} />
+        <AllProductsClient products={products} />
       </div>
     </div>
   );
