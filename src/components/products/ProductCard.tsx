@@ -25,7 +25,15 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
-    addItem(product, selectedPack, 1);
+    void fetch("/api/auth/session")
+      .then((response) => response.json())
+      .then((session) => {
+        if (!session.user) {
+          window.location.href = `/login/?returnTo=${encodeURIComponent(productUrl)}`;
+          return;
+        }
+        addItem(product, selectedPack, 1);
+      });
   };
 
   return (

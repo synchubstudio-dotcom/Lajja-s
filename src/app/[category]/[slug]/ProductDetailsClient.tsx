@@ -32,11 +32,23 @@ export function ProductDetailsClient({ product }: ProductDetailsClientProps) {
   const selectedPack = product.packOptions[selectedPackIndex] || product.packOptions[0];
   const discountPercent = calculateDiscount(selectedPack.price, selectedPack.compareAtPrice);
 
-  const handleAddToCart = () => {
+  const requireLogin = async () => {
+    const response = await fetch("/api/auth/session");
+    const session = await response.json();
+    if (!session.user) {
+      router.push(`/login/?returnTo=${encodeURIComponent(window.location.pathname)}`);
+      return false;
+    }
+    return true;
+  };
+
+  const handleAddToCart = async () => {
+    if (!(await requireLogin())) return;
     addItem(product, selectedPack, quantity);
   };
 
-  const handleBuyNow = () => {
+  const handleBuyNow = async () => {
+    if (!(await requireLogin())) return;
     addItem(product, selectedPack, quantity);
     router.push("/checkout/");
   };

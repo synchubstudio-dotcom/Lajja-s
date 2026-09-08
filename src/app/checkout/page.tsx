@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { 
@@ -21,6 +22,7 @@ import { Order } from "@/types/order";
 import { SITE_CONFIG } from "@/lib/constants";
 
 export default function CheckoutPage() {
+  const router = useRouter();
   const { items, clearCart, coupon, getTotals } = useCartStore();
   const totals = getTotals();
 
@@ -40,6 +42,14 @@ export default function CheckoutPage() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [completedOrder, setCompletedOrder] = useState<Order | null>(null);
   const checkoutFormRef = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    fetch("/api/auth/session")
+      .then((response) => response.json())
+      .then((session) => {
+        if (!session.user) router.replace(`/login/?returnTo=${encodeURIComponent("/checkout/")}`);
+      });
+  }, [router]);
 
   if (items.length === 0 && !completedOrder) {
     return (

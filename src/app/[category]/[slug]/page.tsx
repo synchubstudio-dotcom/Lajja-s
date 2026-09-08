@@ -21,7 +21,10 @@ import { CATEGORIES } from "@/data/categories";
 import { BLOG_ARTICLES } from "@/data/blog";
 import { constructMetadata } from "@/lib/seo";
 import { generateProductSchema, generateFAQSchema } from "@/lib/schema";
+import { getCatalogProducts } from "@/lib/product-catalog";
 import { ProductDetailsClient } from "./ProductDetailsClient";
+
+export const dynamic = "force-dynamic";
 
 interface ProductPageProps {
   params: Promise<{
@@ -31,7 +34,8 @@ interface ProductPageProps {
 }
 
 export async function generateStaticParams() {
-  return PRODUCTS.map((product) => ({
+  const products = await getCatalogProducts();
+  return products.map((product) => ({
     category: product.categorySlug,
     slug: product.slug,
   }));
@@ -39,7 +43,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
   const { category: categorySlug, slug: productSlug } = await params;
-  const product = PRODUCTS.find(
+  const product = (await getCatalogProducts()).find(
     (p) => p.categorySlug === categorySlug && p.slug === productSlug
   );
 
@@ -59,7 +63,8 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
 
 export default async function ProductDetailPage({ params }: ProductPageProps) {
   const { category: categorySlug, slug: productSlug } = await params;
-  const product = PRODUCTS.find(
+  const products = await getCatalogProducts();
+  const product = products.find(
     (p) => p.categorySlug === categorySlug && p.slug === productSlug
   );
 
@@ -67,7 +72,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
     notFound();
   }
 
-  const relatedProducts = PRODUCTS.filter(
+  const relatedProducts = products.filter(
     (p) => p.categorySlug === product.categorySlug && p.id !== product.id
   );
 

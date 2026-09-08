@@ -11,6 +11,9 @@ import { CATEGORIES } from "@/data/categories";
 import { PRODUCTS } from "@/data/products";
 import { constructMetadata } from "@/lib/seo";
 import { generateItemListSchema, generateFAQSchema } from "@/lib/schema";
+import { getCatalogProducts } from "@/lib/product-catalog";
+
+export const dynamic = "force-dynamic";
 
 interface CategoryPageProps {
   params: Promise<{
@@ -43,12 +46,13 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
 export default async function CategoryPage({ params }: CategoryPageProps) {
   const { category: categorySlug } = await params;
   const category = CATEGORIES.find((c) => c.slug === categorySlug);
+  const products = await getCatalogProducts();
 
   if (!category) {
     notFound();
   }
 
-  const categoryProducts = PRODUCTS.filter((p) => p.categorySlug === category.slug);
+  const categoryProducts = products.filter((p) => p.categorySlug === category.slug);
   const otherCategories = CATEGORIES.filter((c) => c.slug !== category.slug);
 
   const itemListSchema = generateItemListSchema(

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { PRODUCTS } from "@/data/products";
+import { getCatalogProducts } from "@/lib/product-catalog";
 
 interface RouteParams {
   params: Promise<{
@@ -9,7 +9,7 @@ interface RouteParams {
 
 export async function GET(request: Request, { params }: RouteParams) {
   const { slug } = await params;
-  const product = PRODUCTS.find((p) => p.slug === slug);
+  const product = (await getCatalogProducts()).find((p) => p.slug === slug);
 
   if (!product) {
     return NextResponse.json(
