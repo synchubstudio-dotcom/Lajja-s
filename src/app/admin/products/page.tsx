@@ -23,7 +23,7 @@ export default function AdminProductsPage() {
   useEffect(() => { void load(); }, []);
 
   function edit(product: ProductRecord) {
-    setEditingId(product._id);
+    setEditingId(String(product._id ?? product.id ?? ""));
     const { _id, ...editable } = product;
     setDraft(JSON.stringify(editable, null, 2));
   }

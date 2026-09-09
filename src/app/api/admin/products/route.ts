@@ -42,9 +42,13 @@ export async function POST(request: Request) {
 export async function PUT(request: Request) {
   if (!(await requireAdmin())) return NextResponse.json({ message: "Forbidden" }, { status: 403 });
   const { id, ...changes } = await request.json();
-  if (!id || !ObjectId.isValid(id)) return NextResponse.json({ message: "Valid product id is required." }, { status: 400 });
+  const productId = typeof id === "string" ? id : id?.$oid;
+  if (!productId) return NextResponse.json({ message: "Product id is required." }, { status: 400 });
   try {
-    const result = await (await getDatabase()).collection("products").updateOne({ _id: new ObjectId(id) }, { $set: { ...changes, updatedAt: new Date() } });
+    const filter = ObjectId.isValid(productId)
+      ? { _id: new ObjectId(productId) }
+      : { id: productId };
+    const result = await (await getDatabase()).collection("products").updateOne(filter, { $set: { ...changes, updatedAt: new Date() } });
     if (!result.matchedCount) return NextResponse.json({ message: "Product not found." }, { status: 404 });
     return NextResponse.json({ success: true });
   } catch (error) {
@@ -56,9 +60,13 @@ export async function PUT(request: Request) {
 export async function DELETE(request: Request) {
   if (!(await requireAdmin())) return NextResponse.json({ message: "Forbidden" }, { status: 403 });
   const { id } = await request.json();
-  if (!id || !ObjectId.isValid(id)) return NextResponse.json({ message: "Valid product id is required." }, { status: 400 });
+  const productId = typeof id === "string" ? id : id?.$oid;
+  if (!productId) return NextResponse.json({ message: "Product id is required." }, { status: 400 });
   try {
-    const result = await (await getDatabase()).collection("products").deleteOne({ _id: new ObjectId(id) });
+    const filter = ObjectId.isValid(productId)
+      ? { _id: new ObjectId(productId) }
+      : { id: productId };
+    const result = await (await getDatabase()).collection("products").deleteOne(filter);
     if (!result.deletedCount) return NextResponse.json({ message: "Product not found." }, { status: 404 });
     return NextResponse.json({ success: true });
   } catch (error) {
