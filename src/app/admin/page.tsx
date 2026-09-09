@@ -28,11 +28,11 @@ export default async function AdminPage() {
             <p className="mt-2 text-sm text-stone-500">Add, edit, or remove products and their catalog data.</p>
             <span className="mt-5 inline-block text-sm font-bold text-[#1f5a3d]">Manage products →</span>
           </Link>
-          <div className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm">
+          <Link href="/admin/categories/" className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-[#1f5a3d]">
             <h3 className="font-serif text-xl font-bold text-stone-900">Categories</h3>
-            <p className="mt-2 text-sm text-stone-500">Category management is ready for the next admin module.</p>
-            <span className="mt-5 inline-block text-xs font-bold uppercase tracking-wider text-stone-400">Coming soon</span>
-          </div>
+            <p className="mt-2 text-sm text-stone-500">Add, edit, or remove storefront categories.</p>
+            <span className="mt-5 inline-block text-sm font-bold text-[#1f5a3d]">Manage categories →</span>
+          </Link>
           <div className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm">
             <h3 className="font-serif text-xl font-bold text-stone-900">Orders</h3>
             <p className="mt-2 text-sm text-stone-500">Review and update customer orders from one workspace.</p>
