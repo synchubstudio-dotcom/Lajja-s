@@ -40,7 +40,6 @@ export default async function AdminPage() {
           </div>
         </div>
       </section>
-      </div>
     </main>
   );
 }
