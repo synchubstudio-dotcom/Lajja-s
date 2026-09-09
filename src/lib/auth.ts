@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
+import { createHash, randomBytes } from "node:crypto";
 
 const secret = new TextEncoder().encode(process.env.AUTH_SECRET);
 const cookieName = "lajjas_session";
@@ -50,4 +51,13 @@ export async function getSession(): Promise<SessionUser | null> {
 
 export async function clearSession() {
   (await cookies()).delete(cookieName);
+}
+
+export function createResetToken() {
+  const token = randomBytes(32).toString("hex");
+  return { token, hash: hashResetToken(token) };
+}
+
+export function hashResetToken(token: string) {
+  return createHash("sha256").update(token).digest("hex");
 }
