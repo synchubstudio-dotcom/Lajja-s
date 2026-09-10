@@ -7,23 +7,23 @@ if (process.env.NODE_ENV !== "production") {
   dns.promises.setServers(["8.8.8.8", "8.8.4.4"]);
 }
 
-const uri = process.env.MONGODB_URI;
-if (!uri) throw new Error("Missing MONGODB_URI.");
-
 const globalForMongo = globalThis as typeof globalThis & {
   mongoClient?: MongoClient;
 };
 
-export const mongoClient =
-  globalForMongo.mongoClient ?? new MongoClient(uri);
-
-if (process.env.NODE_ENV !== "production") {
-  globalForMongo.mongoClient = mongoClient;
+function getMongoClient() {
+  const uri = process.env.MONGODB_URI;
+  if (!uri) throw new Error("Missing MONGODB_URI.");
+  if (!globalForMongo.mongoClient) {
+    globalForMongo.mongoClient = new MongoClient(uri);
+  }
+  return globalForMongo.mongoClient;
 }
 
 export async function getDatabase() {
   const dbName = process.env.MONGODB_DB;
   if (!dbName) throw new Error("Missing MONGODB_DB.");
+  const mongoClient = getMongoClient();
   await mongoClient.connect();
   return mongoClient.db(dbName);
 }
