@@ -100,19 +100,34 @@ export default function MyAccountPage() {
           </Link>
 
           {isAdmin && (
-            <Link
-              href="/admin/products/"
-              className="p-6 bg-[#1f5a3d] text-white rounded-3xl border border-[#1f5a3d] hover:bg-[#17462f] shadow-xs transition-all flex items-start gap-4 md:col-span-3"
-            >
-              <div className="p-3 bg-white/15 rounded-2xl shrink-0">
-                <ShieldCheck className="w-6 h-6" />
-              </div>
-              <div>
-                <h2 className="text-base font-bold font-serif">Manage Products</h2>
-                <p className="text-xs text-white/80 mt-1">Add, edit, or remove products from the storefront.</p>
-                <span className="inline-block mt-3 text-xs font-bold">Open Product Management →</span>
-              </div>
-            </Link>
+            <>
+              <Link
+                href="/admin/products/"
+                className="p-6 bg-[#1f5a3d] text-white rounded-3xl border border-[#1f5a3d] hover:bg-[#17462f] shadow-xs transition-all flex items-start gap-4"
+              >
+                <div className="p-3 bg-white/15 rounded-2xl shrink-0">
+                  <ShieldCheck className="w-6 h-6" />
+                </div>
+                <div>
+                  <h2 className="text-base font-bold font-serif">Manage Products</h2>
+                  <p className="text-xs text-white/80 mt-1">Add, edit, or remove products from the storefront.</p>
+                  <span className="inline-block mt-3 text-xs font-bold">Open Product Management →</span>
+                </div>
+              </Link>
+              <Link
+                href="/admin/categories/"
+                className="p-6 bg-[#f6f0e5] text-[#1f5a3d] rounded-3xl border border-[#d8c9ad] hover:bg-[#eee4d2] shadow-xs transition-all flex items-start gap-4"
+              >
+                <div className="p-3 bg-[#1f5a3d]/10 rounded-2xl shrink-0">
+                  <ShieldCheck className="w-6 h-6" />
+                </div>
+                <div>
+                  <h2 className="text-base font-bold font-serif">Manage Categories</h2>
+                  <p className="text-xs text-stone-600 mt-1">Add, edit, or remove product categories.</p>
+                  <span className="inline-block mt-3 text-xs font-bold">Open Category Management →</span>
+                </div>
+              </Link>
+            </>
           )}
         </div>
 
