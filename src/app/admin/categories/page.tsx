@@ -20,7 +20,7 @@ export default function AdminCategoriesPage() {
   useEffect(() => { void load(); }, []);
 
   function edit(category: CategoryRecord) {
-    setEditingId(String(category._id ?? ""));
+    setEditingId(String(category._id ?? category.id ?? ""));
     const { _id, ...editable } = category;
     setDraft(JSON.stringify(editable, null, 2));
   }

@@ -28,8 +28,12 @@ export async function PUT(request: Request) {
   if (!(await allowed())) return NextResponse.json({ message: "Forbidden" }, { status: 403 });
   const { id, ...changes } = await request.json();
   const categoryId = typeof id === "string" ? id : id?.$oid;
-  if (!categoryId || !ObjectId.isValid(categoryId)) return NextResponse.json({ message: "Valid category id is required." }, { status: 400 });
-  await (await getDatabase()).collection("categories").updateOne({ _id: new ObjectId(categoryId) }, { $set: { ...changes, updatedAt: new Date() } });
+  if (!categoryId) return NextResponse.json({ message: "Category id is required." }, { status: 400 });
+  const filter = ObjectId.isValid(categoryId)
+    ? { _id: new ObjectId(categoryId) }
+    : { id: categoryId };
+  const result = await (await getDatabase()).collection("categories").updateOne(filter, { $set: { ...changes, updatedAt: new Date() } });
+  if (!result.matchedCount) return NextResponse.json({ message: "Category not found." }, { status: 404 });
   return NextResponse.json({ success: true });
 }
 
@@ -37,7 +41,11 @@ export async function DELETE(request: Request) {
   if (!(await allowed())) return NextResponse.json({ message: "Forbidden" }, { status: 403 });
   const { id } = await request.json();
   const categoryId = typeof id === "string" ? id : id?.$oid;
-  if (!categoryId || !ObjectId.isValid(categoryId)) return NextResponse.json({ message: "Valid category id is required." }, { status: 400 });
-  await (await getDatabase()).collection("categories").deleteOne({ _id: new ObjectId(categoryId) });
+  if (!categoryId) return NextResponse.json({ message: "Category id is required." }, { status: 400 });
+  const filter = ObjectId.isValid(categoryId)
+    ? { _id: new ObjectId(categoryId) }
+    : { id: categoryId };
+  const result = await (await getDatabase()).collection("categories").deleteOne(filter);
+  if (!result.deletedCount) return NextResponse.json({ message: "Category not found." }, { status: 404 });
   return NextResponse.json({ success: true });
 }
