@@ -4,13 +4,14 @@ import React, { useState, useMemo } from "react";
 import { Search, SlidersHorizontal, RotateCcw } from "lucide-react";
 import { Product } from "@/types/product";
 import { ProductGrid } from "@/components/products/ProductGrid";
-import { CATEGORIES } from "@/data/categories";
+import { Category } from "@/types/category";
 
 interface AllProductsClientProps {
   products: Product[];
+  categories: Category[];
 }
 
-export function AllProductsClient({ products }: AllProductsClientProps) {
+export function AllProductsClient({ products, categories }: AllProductsClientProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [sortBy, setSortBy] = useState<string>("featured");
@@ -111,7 +112,7 @@ export function AllProductsClient({ products }: AllProductsClientProps) {
           >
             All Delicacies ({products.length})
           </button>
-          {CATEGORIES.map((cat) => {
+          {categories.map((cat) => {
             const count = products.filter((p) => p.categorySlug === cat.slug).length;
             return (
               <button

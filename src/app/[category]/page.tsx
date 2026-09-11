@@ -12,6 +12,7 @@ import { PRODUCTS } from "@/data/products";
 import { constructMetadata } from "@/lib/seo";
 import { generateItemListSchema, generateFAQSchema } from "@/lib/schema";
 import { getCatalogProducts } from "@/lib/product-catalog";
+import { getCatalogCategories } from "@/lib/category-catalog";
 
 export const dynamic = "force-dynamic";
 
@@ -29,7 +30,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
   const { category: categorySlug } = await params;
-  const category = CATEGORIES.find((c) => c.slug === categorySlug);
+  const category = (await getCatalogCategories()).find((c) => c.slug === categorySlug);
 
   if (!category) {
     return constructMetadata({ title: "Category Not Found", noIndex: true });
@@ -45,7 +46,8 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
   const { category: categorySlug } = await params;
-  const category = CATEGORIES.find((c) => c.slug === categorySlug);
+  const categories = await getCatalogCategories();
+  const category = categories.find((c) => c.slug === categorySlug);
   const products = await getCatalogProducts();
 
   if (!category) {
@@ -53,7 +55,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   }
 
   const categoryProducts = products.filter((p) => p.categorySlug === category.slug);
-  const otherCategories = CATEGORIES.filter((c) => c.slug !== category.slug);
+  const otherCategories = categories.filter((c) => c.slug !== category.slug);
 
   const itemListSchema = generateItemListSchema(
     `${category.name} - Lajja's Foods`,

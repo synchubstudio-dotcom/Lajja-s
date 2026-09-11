@@ -7,6 +7,7 @@ import { generateItemListSchema } from "@/lib/schema";
 import { PRODUCTS } from "@/data/products";
 import { AllProductsClient } from "./AllProductsClient";
 import { getCatalogProducts } from "@/lib/product-catalog";
+import { getCatalogCategories } from "@/lib/category-catalog";
 
 export const dynamic = "force-dynamic";
 
@@ -18,6 +19,7 @@ export const metadata: Metadata = constructMetadata({
 
 export default async function AllProductsPage() {
   const products = await getCatalogProducts();
+  const categories = await getCatalogCategories();
   const itemListSchema = generateItemListSchema(
     "Lajja's Foods - All Gujarati Snacks",
     products.map((p) => ({
@@ -46,7 +48,7 @@ export default async function AllProductsPage() {
         </div>
 
         {/* Interactive Filter & Product Catalogue */}
-        <AllProductsClient products={products} />
+        <AllProductsClient products={products} categories={categories} />
       </div>
     </div>
   );

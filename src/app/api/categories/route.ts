@@ -1,10 +1,11 @@
 import { NextResponse } from "next/server";
-import { CATEGORIES } from "@/data/categories";
+import { getCatalogCategories } from "@/lib/category-catalog";
 
 export async function GET() {
+  const categories = await getCatalogCategories();
   return NextResponse.json({
     success: true,
-    total: CATEGORIES.length,
-    data: CATEGORIES,
+    total: categories.length,
+    data: categories,
   });
 }

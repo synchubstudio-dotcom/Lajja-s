@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { CATEGORIES } from "@/data/categories";
+import { getCatalogCategories } from "@/lib/category-catalog";
 
 interface RouteParams {
   params: Promise<{
@@ -9,7 +9,7 @@ interface RouteParams {
 
 export async function GET(request: Request, { params }: RouteParams) {
   const { slug } = await params;
-  const category = CATEGORIES.find((c) => c.slug === slug);
+  const category = (await getCatalogCategories()).find((c) => c.slug === slug);
 
   if (!category) {
     return NextResponse.json(
