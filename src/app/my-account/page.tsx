@@ -17,8 +17,14 @@ import { formatPrice, formatDate } from "@/lib/utils";
 
 export default function MyAccountPage() {
   const [orders, setOrders] = useState<Order[]>([]);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
+    fetch("/api/auth/session")
+      .then((response) => response.json())
+      .then((session) => setIsAdmin(session.user?.role === "admin"))
+      .catch((error) => console.error("Unable to load account session:", error));
+
     const saved = localStorage.getItem("lajjas_foods_orders");
     if (saved) {
       try {
@@ -43,7 +49,7 @@ export default function MyAccountPage() {
           </p>
         </div>
 
-        {/* Shortcuts 3 Cards Grid */}
+        {/* Shortcuts and admin tools */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <Link
             href="/my-account/orders/"
@@ -92,6 +98,22 @@ export default function MyAccountPage() {
               </span>
             </div>
           </Link>
+
+          {isAdmin && (
+            <Link
+              href="/admin/products/"
+              className="p-6 bg-[#1f5a3d] text-white rounded-3xl border border-[#1f5a3d] hover:bg-[#17462f] shadow-xs transition-all flex items-start gap-4 md:col-span-3"
+            >
+              <div className="p-3 bg-white/15 rounded-2xl shrink-0">
+                <ShieldCheck className="w-6 h-6" />
+              </div>
+              <div>
+                <h2 className="text-base font-bold font-serif">Manage Products</h2>
+                <p className="text-xs text-white/80 mt-1">Add, edit, or remove products from the storefront.</p>
+                <span className="inline-block mt-3 text-xs font-bold">Open Product Management →</span>
+              </div>
+            </Link>
+          )}
         </div>
 
         {/* Recent Orders Overview */}
