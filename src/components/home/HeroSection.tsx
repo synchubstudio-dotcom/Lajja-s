@@ -74,6 +74,24 @@ export function HeroSection() {
     swipeStartX.current = null;
   };
 
+  const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+    swipeStartX.current = event.changedTouches[0]?.clientX ?? null;
+  };
+
+  const handleTouchEnd = (event: React.TouchEvent<HTMLDivElement>) => {
+    if (swipeStartX.current === null) return;
+
+    const distance = (event.changedTouches[0]?.clientX ?? swipeStartX.current) - swipeStartX.current;
+    swipeStartX.current = null;
+
+    if (Math.abs(distance) < 50) return;
+    if (distance > 0) {
+      showPreviousSlide();
+    } else {
+      showNextSlide();
+    }
+  };
+
   return (
     <section className="relative overflow-hidden border-b border-[#e8e1d8] bg-[#f5efe7] py-6 sm:py-8">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -85,6 +103,8 @@ export function HeroSection() {
             onPointerDown={handlePointerDown}
             onPointerUp={handlePointerUp}
             onPointerCancel={handlePointerCancel}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
           >
             <div className="space-y-5 pr-0 lg:pr-4" aria-live="polite">
               <div className="inline-flex items-center rounded-full border border-[#dfe6df] bg-[#edf5ee] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#1f5a3d]">
