@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
@@ -32,24 +32,59 @@ const slides = [
 export function HeroSection() {
   const [activeSlide, setActiveSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const swipeStartX = useRef<number | null>(null);
   const slide = slides[activeSlide];
 
   useEffect(() => {
     if (isPaused) return;
     const timer = window.setInterval(() => {
       setActiveSlide((current) => (current + 1) % slides.length);
-    }, 5000);
+    }, 3000);
     return () => window.clearInterval(timer);
   }, [isPaused]);
+
+  const showPreviousSlide = () => {
+    setActiveSlide((current) => (current - 1 + slides.length) % slides.length);
+  };
+
+  const showNextSlide = () => {
+    setActiveSlide((current) => (current + 1) % slides.length);
+  };
+
+  const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+    swipeStartX.current = event.clientX;
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+
+  const handlePointerUp = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (swipeStartX.current === null) return;
+
+    const distance = event.clientX - swipeStartX.current;
+    swipeStartX.current = null;
+
+    if (Math.abs(distance) < 50) return;
+    if (distance > 0) {
+      showPreviousSlide();
+    } else {
+      showNextSlide();
+    }
+  };
+
+  const handlePointerCancel = () => {
+    swipeStartX.current = null;
+  };
 
   return (
     <section className="relative overflow-hidden border-b border-[#e8e1d8] bg-[#f5efe7] py-6 sm:py-8">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="rounded-[28px] border border-[#e7e1d5] bg-[#f7f2ea] p-4 sm:p-6 lg:p-8">
           <div
-            className="relative grid items-center gap-6 lg:grid-cols-[1.05fr_1.3fr]"
+            className="relative grid touch-pan-y select-none items-center gap-6 lg:grid-cols-[1.05fr_1.3fr]"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
+            onPointerDown={handlePointerDown}
+            onPointerUp={handlePointerUp}
+            onPointerCancel={handlePointerCancel}
           >
             <div className="space-y-5 pr-0 lg:pr-4" aria-live="polite">
               <div className="inline-flex items-center rounded-full border border-[#dfe6df] bg-[#edf5ee] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#1f5a3d]">
