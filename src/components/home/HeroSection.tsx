@@ -124,9 +124,6 @@ export function HeroSection() {
                   </div>
                 ))}
               </div>
-              <Link href="/products/all-products/" className="inline-flex items-center gap-2 rounded-full border border-[#2d6b49] bg-[#2d6b49] px-7 py-3 text-sm font-semibold text-white shadow-sm transition-all hover:bg-[#245a3d] hover:shadow-md">
-                Shop Now <ArrowRight className="h-4 w-4" />
-              </Link>
             </div>
 
             <div className="relative flex justify-center lg:justify-end">
