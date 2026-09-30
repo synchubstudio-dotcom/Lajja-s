@@ -50,6 +50,7 @@ export default function AdminCategoriesPage() {
     <main className="mx-auto max-w-6xl px-4 py-12">
       <h1 className="font-serif text-4xl font-bold text-stone-900">Manage categories</h1>
       <p className="mt-2 text-sm text-stone-500">Create, edit, or remove storefront categories using the category JSON shape.</p>
+      <p className="mt-1 text-sm text-stone-500">Each category automatically gets a storefront page at its slug URL. A name is required; if you omit the slug or page details, they are generated with sensible defaults. Deleting a category removes its page.</p>
       {message && <p className="mt-4 text-sm font-semibold text-[#1f5a3d]">{message}</p>}
       <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_1.2fr]">
         <section className="space-y-3">

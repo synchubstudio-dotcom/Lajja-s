@@ -1,13 +1,16 @@
 import { NextResponse } from "next/server";
 import { SITE_CONFIG } from "@/lib/constants";
-import { CATEGORIES } from "@/data/categories";
 import { PRODUCTS } from "@/data/products";
 import { LOCATIONS } from "@/data/locations";
 import { BLOG_ARTICLES, BLOG_CATEGORIES } from "@/data/blog";
 import { PORTFOLIO_ITEMS } from "@/data/portfolio";
+import { getCatalogCategories } from "@/lib/category-catalog";
+
+export const dynamic = "force-dynamic";
 
 export async function GET() {
   const baseUrl = SITE_CONFIG.url;
+  const categories = await getCatalogCategories();
 
   const staticUrls = [
     { loc: `${baseUrl}/`, priority: "1.0", changefreq: "daily" },
@@ -25,7 +28,7 @@ export async function GET() {
     { loc: `${baseUrl}/cancellation-policy/`, priority: "0.4", changefreq: "monthly" },
   ];
 
-  const categoryUrls = CATEGORIES.map((cat) => ({
+  const categoryUrls = categories.map((cat) => ({
     loc: `${baseUrl}/${cat.slug}/`,
     priority: "0.9",
     changefreq: "weekly",
@@ -90,7 +93,7 @@ ${allEntries
     status: 200,
     headers: {
       "Content-Type": "application/xml",
-      "Cache-Control": "public, max-age=86400, s-maxage=86400, stale-while-revalidate=86400",
+      "Cache-Control": "no-store",
     },
   });
 }

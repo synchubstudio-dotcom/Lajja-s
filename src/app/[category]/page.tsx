@@ -7,25 +7,18 @@ import { ArrowRight, CheckCircle2, ShieldCheck, Sparkles, HelpCircle } from "luc
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { ProductCard } from "@/components/products/ProductCard";
-import { CATEGORIES } from "@/data/categories";
-import { PRODUCTS } from "@/data/products";
 import { constructMetadata } from "@/lib/seo";
 import { generateItemListSchema, generateFAQSchema } from "@/lib/schema";
 import { getCatalogProducts } from "@/lib/product-catalog";
 import { getCatalogCategories } from "@/lib/category-catalog";
 
 export const dynamic = "force-dynamic";
+export const dynamicParams = true;
 
 interface CategoryPageProps {
   params: Promise<{
     category: string;
   }>;
-}
-
-export async function generateStaticParams() {
-  return CATEGORIES.map((cat) => ({
-    category: cat.slug,
-  }));
 }
 
 export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {

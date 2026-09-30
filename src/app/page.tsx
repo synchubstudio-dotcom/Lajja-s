@@ -4,11 +4,14 @@ import { HeroSection } from "@/components/home/HeroSection";
 import { ProductCard } from "@/components/products/ProductCard";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { PRODUCTS } from "@/data/products";
-import { CATEGORIES } from "@/data/categories";
 import { FAQS } from "@/data/faqs";
 import { generateFAQSchema } from "@/lib/schema";
+import { getCatalogCategories } from "@/lib/category-catalog";
 
-export default function HomePage() {
+export const dynamic = "force-dynamic";
+
+export default async function HomePage() {
+  const categories = await getCatalogCategories();
   const bestSellers = PRODUCTS.filter((product) => product.bestSeller);
   const homeFaqs = FAQS.slice(0, 4);
 
@@ -24,7 +27,7 @@ export default function HomePage() {
       <main className="bg-[#eaeded] pb-16">
         <section className="mx-auto -mt-2 max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {CATEGORIES.slice(0, 4).map((category) => (
+            {categories.slice(0, 4).map((category) => (
               <Link key={category.slug} href={`/${category.slug}/`} className="group bg-white p-5 shadow-sm">
                 <h2 className="font-serif text-xl font-bold text-stone-900">{category.name}</h2>
                 <div className="mt-4 overflow-hidden bg-[#f6f0e5]">
