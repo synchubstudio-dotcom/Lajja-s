@@ -259,7 +259,7 @@ export function HeroSection() {
                   event.stopPropagation();
                   showPreviousSlide();
                 }}
-                className="absolute left-4 top-1/2 z-[100] flex h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-sm shadow-[0_8px_30px_rgba(0,0,0,0.2)] transition-all duration-300 hover:scale-110 hover:bg-white/15 active:scale-95 sm:left-6"
+                className="absolute left-4 top-1/2 z-[30] flex h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-sm shadow-[0_8px_30px_rgba(0,0,0,0.2)] transition-all duration-300 hover:scale-110 hover:bg-white/15 active:scale-95 sm:left-6"
               >
                 <ArrowLeft size={26} strokeWidth={2.5} />
               </button>
@@ -275,7 +275,7 @@ export function HeroSection() {
                   event.stopPropagation();
                   showNextSlide();
                 }}
-                className="absolute right-4 top-1/2 z-[100] flex h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-sm shadow-[0_8px_30px_rgba(0,0,0,0.2)] transition-all duration-300 hover:scale-110 hover:bg-white/15 active:scale-95 sm:right-6"
+                className="absolute right-4 top-1/2 z-[30] flex h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-sm shadow-[0_8px_30px_rgba(0,0,0,0.2)] transition-all duration-300 hover:scale-110 hover:bg-white/15 active:scale-95 sm:right-6"
               >
                 <ArrowRight size={26} strokeWidth={2.5} />
               </button>
