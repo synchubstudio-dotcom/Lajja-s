@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { 
   ShoppingBag, 
   Menu, 
@@ -16,13 +16,17 @@ import {
 import { NAV_LINKS, SITE_CONFIG } from "@/lib/constants";
 import { MegaMenu } from "./MegaMenu";
 import { MobileMenu } from "./MobileMenu";
+import { LoginModal } from "@/components/auth/LoginModal";
 import { useCartStore } from "@/store/cartStore";
 
 export function Header() {
   const pathname = usePathname();
+  const router = useRouter();
   const [isMegaOpen, setIsMegaOpen] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [accountCheckError, setAccountCheckError] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [hasHydrated, setHasHydrated] = useState(false);
   const megaTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -46,11 +50,44 @@ export function Header() {
     }, 150);
   };
 
+  const handleAccountClick = async () => {
+    setAccountCheckError("");
+    try {
+      const response = await fetch("/api/auth/session");
+      if (!response.ok) {
+        throw new Error(`Session check failed with status ${response.status}.`);
+      }
+      const session: { user?: unknown } = await response.json();
+      if (session.user) {
+        router.push("/my-account/");
+        router.refresh();
+        return;
+      }
+      setIsLoginOpen(true);
+    } catch (error) {
+      console.error("Unable to check account session:", error);
+      setAccountCheckError("We couldn’t verify your sign-in status. You can still try signing in below.");
+      setIsLoginOpen(true);
+    }
+  };
+
+  const closeLogin = () => {
+    setIsLoginOpen(false);
+    setAccountCheckError("");
+  };
+
+  const handleLoginSuccess = () => {
+    closeLogin();
+    router.push("/my-account/");
+    router.refresh();
+  };
+
   // Close menus on route changes
   useEffect(() => {
     setIsMegaOpen(false);
     setIsMobileOpen(false);
     setIsSearchOpen(false);
+    setIsLoginOpen(false);
   }, [pathname]);
 
   return (
@@ -241,13 +278,14 @@ export function Header() {
               </button>
 
               {/* My Account */}
-              <Link
-                href="/my-account/"
+              <button
+                type="button"
+                onClick={() => void handleAccountClick()}
                 className="p-2 text-stone-700 hover:text-terracotta-800 rounded-full hover:bg-stone-100 transition-colors hidden sm:flex"
                 aria-label="My Account and Orders"
               >
                 <User className="w-5 h-5" />
-              </Link>
+              </button>
 
               {/* Cart Drawer Trigger Button */}
               <button
@@ -311,6 +349,13 @@ export function Header() {
       <MobileMenu
         isOpen={isMobileOpen}
         onClose={() => setIsMobileOpen(false)}
+        onAccountClick={() => void handleAccountClick()}
+      />
+      <LoginModal
+        isOpen={isLoginOpen}
+        notice={accountCheckError}
+        onClose={closeLogin}
+        onSuccess={handleLoginSuccess}
       />
     </>
   );

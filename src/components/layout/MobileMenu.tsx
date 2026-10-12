@@ -2,15 +2,16 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { X, ChevronDown, Phone, ShoppingBag, MapPin, Sparkles } from "lucide-react";
+import { X, ChevronDown, Phone, ShoppingBag, MapPin, Sparkles, User } from "lucide-react";
 import { NAV_LINKS, SITE_CONFIG } from "@/lib/constants";
 
 interface MobileMenuProps {
   isOpen: boolean;
   onClose: () => void;
+  onAccountClick: () => void;
 }
 
-export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
+export function MobileMenu({ isOpen, onClose, onAccountClick }: MobileMenuProps) {
   const [expandedCategory, setExpandedCategory] = useState<string | null>("thepla");
   const productsNav = NAV_LINKS.find((link) => link.isMega);
 
@@ -48,6 +49,18 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
         {/* Navigation Content */}
         <div className="flex-1 px-4 py-4 space-y-3">
+          <button
+            type="button"
+            onClick={() => {
+              onClose();
+              onAccountClick();
+            }}
+            className="flex w-full items-center gap-2 py-2 text-left text-sm font-semibold text-stone-800 hover:text-terracotta-700"
+          >
+            <User className="h-4 w-4" />
+            My Account
+          </button>
+
           <Link
             href="/"
             onClick={onClose}
