@@ -1,10 +1,6 @@
 import Link from "next/link";
 import {
   ArrowRight,
-  CheckCircle2,
-  Truck,
-  ShieldCheck,
-  RotateCcw,
 } from "lucide-react";
 import { HeroSection } from "@/components/home/HeroSection";
 import { ProductCard } from "@/components/products/ProductCard";

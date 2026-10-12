@@ -181,7 +181,7 @@ export const CATEGORIES: Category[] = [
     description:
       "Famous Bharuch-style salted groundnuts (Khari Sing) and golden-roasted spiced Bengal gram (Chana). Prepared with traditional sand-roasting for unparalleled crunch and earthy aroma.",
     heroImage:
-      "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=1600&q=80",
+      "https://res.cloudinary.com/yrndj90e/image/upload/v1790597720/methikhakhra-1.jpg",
     traditionContent: {
       heading: "Bharuch's Renowned Roasting Tradition",
       paragraphs: [
