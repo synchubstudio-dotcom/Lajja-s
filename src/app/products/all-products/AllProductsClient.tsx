@@ -16,6 +16,9 @@ export function AllProductsClient({ products, categories }: AllProductsClientPro
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [sortBy, setSortBy] = useState<string>("featured");
   const [selectedDietaryTag, setSelectedDietaryTag] = useState<string>("all");
+  const uniqueCategories = Array.from(
+    new Map(categories.map((category) => [category.slug, category])).values()
+  );
 
   const filteredProducts = useMemo(() => {
     return products
@@ -112,7 +115,7 @@ export function AllProductsClient({ products, categories }: AllProductsClientPro
           >
             All Delicacies ({products.length})
           </button>
-          {categories.map((cat) => {
+          {uniqueCategories.map((cat) => {
             const count = products.filter((p) => p.categorySlug === cat.slug).length;
             return (
               <button
