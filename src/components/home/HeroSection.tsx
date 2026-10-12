@@ -103,7 +103,7 @@ export function HeroSection() {
           <div className="lg:col-span-5 relative">
             <div className="relative aspect-4/3 sm:aspect-square w-full rounded-3xl overflow-hidden shadow-hover border-4 border-white bg-stone-100">
               <Image
-                src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=1200&q=80"
+                src="https://res.cloudinary.com/yrndj90e/image/upload/v1790597720/kharisingchana.webp"
                 alt="Freshly roasted traditional Gujarati Methi Thepla served with sweet mango chundo and tea"
                 fill
                 priority
