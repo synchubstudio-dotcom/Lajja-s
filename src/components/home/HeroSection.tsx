@@ -6,10 +6,9 @@ import { ArrowRight, Sparkles, ShieldCheck, Clock, Award } from "lucide-react";
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden bg-warm-50/80 border-b border-stone-200/80 py-16 sm:py-24">
+    <section className="relative overflow-hidden bg-white border-b border-stone-800 py-16 sm:py-24">
       {/* Background Decorative Gradient */}
-      <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-kesari-200/40 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-96 h-96 rounded-full bg-terracotta-200/30 blur-3xl pointer-events-none" />
+      <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
@@ -53,50 +52,6 @@ export function HeroSection() {
               </Link>
             </div>
 
-            {/* Micro Trust Indicators */}
-            <div className="pt-6 border-t border-stone-200/80 grid grid-cols-3 gap-4 text-left">
-              <div className="flex items-center gap-2">
-                <div className="p-2 rounded-lg bg-kesari-100 text-kesari-800 shrink-0">
-                  <ShieldCheck className="w-4 h-4" />
-                </div>
-                <div>
-                  <span className="block text-xs font-bold text-stone-900 font-serif">
-                    Vacuum Sealed
-                  </span>
-                  <span className="text-[11px] text-stone-500">
-                    20+ Days Fresh
-                  </span>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <div className="p-2 rounded-lg bg-kesari-100 text-kesari-800 shrink-0">
-                  <Clock className="w-4 h-4" />
-                </div>
-                <div>
-                  <span className="block text-xs font-bold text-stone-900 font-serif">
-                    Daily Kitchen
-                  </span>
-                  <span className="text-[11px] text-stone-500">
-                    Roasted to Order
-                  </span>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <div className="p-2 rounded-lg bg-kesari-100 text-kesari-800 shrink-0">
-                  <Award className="w-4 h-4" />
-                </div>
-                <div>
-                  <span className="block text-xs font-bold text-stone-900 font-serif">
-                    100% Purity
-                  </span>
-                  <span className="text-[11px] text-stone-500">
-                    Zero Added Chem
-                  </span>
-                </div>
-              </div>
-            </div>
           </div>
 
           {/* Hero Imagery Column */}
