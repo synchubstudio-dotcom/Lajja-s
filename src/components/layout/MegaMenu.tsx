@@ -121,7 +121,7 @@ export function MegaMenu({ isOpen, onClose, onMouseEnter, onMouseLeave }: MegaMe
           {/* Highlight Travel Banner inside Mega Menu */}
           <div className="mt-5 bg-gradient-to-r from-terracotta-800 to-terracotta-900 rounded-2xl p-4 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-kesari-500 text-stone-950 flex items-center justify-center shrink-0 font-bold">
+              <div className="w-8 h-8 rounded-full bg-kesari-500 text-terracotta-950 flex items-center justify-center shrink-0 font-bold">
                 <Sparkles className="w-4 h-4" />
               </div>
               <div>
@@ -136,7 +136,7 @@ export function MegaMenu({ isOpen, onClose, onMouseEnter, onMouseLeave }: MegaMe
             <Link
               href="/combo-packs/travel-combo/"
               onClick={onClose}
-              className="px-4 py-2 text-xs font-bold text-stone-950 bg-kesari-500 hover:bg-kesari-400 rounded-xl shadow-xs transition-colors shrink-0 text-center"
+              className="px-4 py-2 text-xs font-bold text-terracotta-950 bg-kesari-500 hover:bg-kesari-400 rounded-xl shadow-xs transition-colors shrink-0 text-center"
             >
               Order Flight Pack
             </Link>

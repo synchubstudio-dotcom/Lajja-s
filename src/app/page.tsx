@@ -36,7 +36,7 @@ export default async function HomePage() {
 
       <HeroSection />
 
-      <main className="bg-[#eaeded] pb-16">
+      <main className="bg-white pb-16">
         <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
           <div className="mb-7 flex items-end justify-between gap-4">
             <div>
@@ -60,7 +60,7 @@ export default async function HomePage() {
           </div>
 
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
-           {uniqueCategories.slice(0, 8).map((category, index) => (
+           {uniqueCategories.slice(0, 4).map((category, index) => (
               <Link
                 key={`${category.slug}-${index}`}
                 href={`/${category.slug}/`}
