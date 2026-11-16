@@ -26,7 +26,7 @@ export default function BlogHubPage() {
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-serif text-stone-900">
             Lajja’s Gujarati Food & Recipe Journal
           </h1>
-          <p className="text-stone-600 text-sm sm:text-base leading-relaxed">
+          <p className="text-terracotta-800 text-sm sm:text-base leading-relaxed">
             Explore authentic food traditions, travel snack storage guides, health benefits of fenugreek and whole grains, and regional culinary comparisons.
           </p>
         </div>
@@ -37,7 +37,7 @@ export default function BlogHubPage() {
             href="/blog/"
             className="px-4 py-2 rounded-xl text-xs font-bold bg-terracotta-700 text-white shadow-xs"
           >
-            All Articles ({BLOG_ARTICLES.length})
+            All Article ({BLOG_ARTICLES.length})
           </Link>
           {BLOG_CATEGORIES.map((cat) => (
             <Link

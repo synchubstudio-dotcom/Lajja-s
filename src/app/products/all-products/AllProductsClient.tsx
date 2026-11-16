@@ -65,7 +65,7 @@ export function AllProductsClient({ products, categories }: AllProductsClientPro
   return (
     <div className="space-y-8">
       {/* Controls Bar: Search, Category Filters, Sort */}
-      <div className="bg-white p-4 sm:p-6 rounded-2xl border border-stone-200/80 shadow-xs space-y-4">
+      <div className="bg-white p-4 sm:p-6 rounded-2xl border border-terracotta-800/80 shadow-xs space-y-4">
         {/* Top Row: Search & Sort */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="relative w-full sm:max-w-md">
@@ -74,13 +74,13 @@ export function AllProductsClient({ products, categories }: AllProductsClientPro
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by snack name, ingredients (e.g. methi, ajwain)..."
-              className="w-full pl-10 pr-4 py-2.5 bg-stone-50 border border-stone-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-terracotta-500 focus:border-transparent text-stone-900"
+              className="w-full pl-10 pr-4 py-2.5 bg-stone-50 border border-terracotta-800-650 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-terracotta-500 focus:border-transparent text-stone-900"
             />
             <Search className="w-4 h-4 text-stone-400 absolute left-3.5 top-3" />
           </div>
 
           <div className="flex items-center gap-2.5 w-full sm:w-auto justify-end">
-            <label className="text-xs font-bold text-stone-500 whitespace-nowrap">
+            <label className="text-xs font-bold text-stone-650 whitespace-nowrap">
               Sort by:
             </label>
             <div className="relative">
@@ -135,7 +135,7 @@ export function AllProductsClient({ products, categories }: AllProductsClientPro
 
         {/* Dietary Tag Quick Filters */}
         <div className="flex flex-wrap items-center gap-2 pt-2 text-xs">
-          <span className="text-stone-400 text-[11px] font-semibold uppercase mr-1">
+          <span className="text-stone-650 text-[11px] font-semibold uppercase mr-1">
             Special Diets:
           </span>
           {["Jain", "High Protein", "Travel", "High Fiber"].map((tag) => (
@@ -145,7 +145,7 @@ export function AllProductsClient({ products, categories }: AllProductsClientPro
               className={`px-2.5 py-1 rounded-lg border text-[11px] font-medium transition-all ${
                 selectedDietaryTag === tag
                   ? "bg-kesari-100 border-kesari-600 text-kesari-900 font-bold"
-                  : "bg-white border-stone-200 text-stone-600 hover:border-stone-400"
+                  : "bg-white border-terracotta-800 text-stone-600 hover:border-terracotta-800"
               }`}
             >
               {tag === "Jain" ? "Jain Friendly" : tag === "Travel" ? "Flight Ready / Travel" : tag}
@@ -165,7 +165,7 @@ export function AllProductsClient({ products, categories }: AllProductsClientPro
       </div>
 
       {/* Results Count */}
-      <div className="flex items-center justify-between text-xs text-stone-500 px-1">
+      <div className="flex items-center justify-between text-xs text-terracotta-800 px-1">
         <span>
           Showing <strong>{filteredProducts.length}</strong> of <strong>{products.length}</strong> items
         </span>

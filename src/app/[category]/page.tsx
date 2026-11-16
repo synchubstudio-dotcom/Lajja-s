@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, CheckCircle2, ShieldCheck, Sparkles, HelpCircle } from "lucide-react";
+import { CheckCircle2, ShieldCheck, Sparkles } from "lucide-react";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { ProductCard } from "@/components/products/ProductCard";
@@ -106,7 +106,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
             </h2>
           </div>
 
-          <div className="space-y-4 text-stone-600 text-sm sm:text-base leading-relaxed">
+          <div className="space-y-4 text-terracotta-800 text-sm sm:text-base leading-relaxed">
             {category.traditionContent.paragraphs.map((p, idx) => (
               <p key={idx}>{p}</p>
             ))}
@@ -114,12 +114,12 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
           {/* Culinary Highlights Badges */}
           <div className="pt-4 border-t border-stone-100">
-            <h3 className="text-xs font-bold uppercase text-stone-400 tracking-wider mb-3">
+            <h3 className="text-xs font-bold uppercase text-stone-900 tracking-wider mb-3">
               Why Choose Lajja’s Foods {category.name}
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {category.culinaryHighlights.map((hl, idx) => (
-                <div key={idx} className="flex items-center gap-2 text-xs font-semibold text-stone-800 bg-warm-50 p-2.5 rounded-xl border border-stone-200/60">
+                <div key={idx} className="flex items-center gap-2 text-xs font-semibold text-terracotta-800 bg-warm-50 p-2.5 rounded-xl border border-stone-200/60">
                   <CheckCircle2 className="w-4 h-4 text-herbal-700 shrink-0" />
                   <span>{hl}</span>
                 </div>
@@ -132,7 +132,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         <div>
           <div className="flex items-center justify-between mb-8">
             <div>
-              <span className="text-xs uppercase font-bold text-kesari-700 tracking-wider">
+              <span className="text-xs uppercase font-bold text-kesari-650 tracking-wider">
                 Freshly Handcrafted Varieties
               </span>
               <h2 className="text-2xl sm:text-3xl font-bold font-serif text-stone-900 mt-1">
@@ -141,7 +141,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {categoryProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}

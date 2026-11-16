@@ -40,7 +40,7 @@ export default async function HomePage() {
         <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
           <div className="mb-7 flex items-end justify-between gap-4">
             <div>
-              <p className="mb-2 text-xs font-bold uppercase tracking-[0.22em] text-amber-700">
+              <p className="mb-2 text-xs font-bold uppercase tracking-[0.22em] text-stone-650">
                 Made with tradition
               </p>
               <h2 className="font-serif text-2xl font-bold text-stone-900 sm:text-3xl">
@@ -64,7 +64,7 @@ export default async function HomePage() {
               <Link
                 key={`${category.slug}-${index}`}
                 href={`/${category.slug}/`}
-                className="group relative overflow-hidden rounded-2xl border border-[#eee6d9] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#d7c5a8] hover:shadow-xl hover:shadow-stone-900/10"
+                className="group relative overflow-hidden rounded-2xl border border-[#0f681b] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#805612] hover:shadow-xl hover:shadow-stone-900/10"
               >
                 <div className="relative overflow-hidden bg-[#f5efe4]">
                   <img
