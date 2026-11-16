@@ -26,7 +26,7 @@ export default function LocationsHubPage() {
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-serif text-stone-900">
             Fresh Gujarati Snacks Delivered Across Gujarat
           </h1>
-          <p className="text-stone-600 text-sm sm:text-base leading-relaxed">
+          <p className="text-terracotta-800 text-sm sm:text-base leading-relaxed">
             From our central artisanal kitchen in Vadodara to doorsteps in Ahmedabad, Surat, Rajkot, Anand, and Bharuch. Experience same-day and express next-day delivery of authentic Gujarati theplas, khakhras, and roasted snacks.
           </p>
         </div>

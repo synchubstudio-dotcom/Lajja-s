@@ -37,7 +37,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
   };
 
   return (
-    <div className="group flex flex-col overflow-hidden rounded-[18px] border border-[#e6e0d5] bg-[#fffdf9] shadow-sm transition-all duration-200 hover:border-[#dfe6df] hover:bg-[#f7f2ea] hover:shadow-md">
+    <div className="group flex flex-col overflow-hidden rounded-[18px] border border-[#0c6d0c] bg-[#fffdf9] shadow-sm transition-all duration-200 hover:border-[#9e8412] hover:bg-[#f7f2ea] hover:shadow-md">
       <Link href={productUrl} className="relative block aspect-[4/3] overflow-hidden bg-[#f1eee8]">
         <Image
           src={primaryImage.url}

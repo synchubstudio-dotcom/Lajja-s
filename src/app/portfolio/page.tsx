@@ -34,7 +34,7 @@ export default function PortfolioHubPage() {
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-serif text-stone-900">
             Our Kitchen Rituals & Packaging Science
           </h1>
-          <p className="text-stone-600 text-sm sm:text-base leading-relaxed">
+          <p className="text-terracotta-700 text-sm sm:text-base leading-relaxed">
             At Lajja’s Foods, making authentic Gujarati food is an art of patience and devotion. Discover our traditional tawa roasting methods, hygienic preparation clean-rooms, and multi-layer vacuum technology that enables travel freshness.
           </p>
         </div>

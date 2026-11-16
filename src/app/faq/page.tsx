@@ -30,10 +30,10 @@ export default function FaqPage() {
           <span className="text-xs font-bold uppercase tracking-widest text-terracotta-700 bg-terracotta-100 px-3 py-1 rounded-full">
             Help Center
           </span>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-serif text-stone-900">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-serif text-terracotta-800">
             Frequently Asked Questions
           </h1>
-          <p className="text-stone-600 text-sm sm:text-base leading-relaxed">
+          <p className="text-kesari-650 text-sm sm:text-base leading-relaxed">
             Everything you need to know about our authentic ingredients, vacuum stay-fresh packaging, flight compliance, and delivery across Gujarat.
           </p>
         </div>
@@ -44,7 +44,7 @@ export default function FaqPage() {
             const catFaqs = FAQS.filter((f) => f.category === cat);
             return (
               <div key={cat} className="space-y-4">
-                <h2 className="text-xl font-bold font-serif text-stone-900 border-b border-stone-200 pb-2">
+                <h2 className="text-xl font-bold font-serif text-terracotta-800 border-b border-stone-200 pb-2">
                   {cat}
                 </h2>
                 <div className="space-y-3">

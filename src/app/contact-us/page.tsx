@@ -31,10 +31,10 @@ export default function ContactUsPage() {
           <span className="text-xs font-bold uppercase tracking-widest text-terracotta-700 bg-terracotta-100 px-3 py-1 rounded-full">
             Vadodara Kitchen & Customer Care
           </span>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-serif text-stone-900">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-serif text-terracotta-600">
             Get in Touch with Lajja’s Foods
           </h1>
-          <p className="text-stone-600 text-sm sm:text-base leading-relaxed">
+          <p className="text-terracotta-800 text-sm sm:text-base leading-relaxed">
             Have questions about customized thepla travel packs, corporate hampers, wedding favors, or local Gujarat delivery schedules? We are here to help.
           </p>
         </div>
@@ -43,7 +43,7 @@ export default function ContactUsPage() {
           {/* Contact Information Column */}
           <div className="lg:col-span-5 space-y-6">
             <div className="bg-white rounded-3xl p-6 sm:p-8 border border-stone-200 shadow-xs space-y-6">
-              <h2 className="text-xl font-bold font-serif text-stone-900">
+              <h2 className="text-xl font-bold font-serif text-terracotta-600">
                 Central Kitchen & Office
               </h2>
 
@@ -117,10 +117,10 @@ export default function ContactUsPage() {
           <div className="lg:col-span-7">
             <div className="bg-white rounded-3xl p-6 sm:p-10 border border-stone-200 shadow-xs space-y-6">
               <div>
-                <h2 className="text-2xl font-bold font-serif text-stone-900">
+                <h2 className="text-2xl font-bold font-serif text-terracotta-600">
                   Send Us a Message
                 </h2>
-                <p className="text-xs sm:text-sm text-stone-500 mt-1">
+                <p className="text-xs sm:text-sm text-kesari-700 mt-1">
                   Fill in the details below and our kitchen team will reach out within 2 hours.
                 </p>
               </div>

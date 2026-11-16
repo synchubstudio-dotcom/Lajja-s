@@ -41,17 +41,17 @@ export function LocationCard({ location }: LocationCardProps) {
         </div>
 
         <div className="p-5 space-y-3">
-          <p className="text-xs text-stone-600 line-clamp-2 leading-relaxed">
+          <p className="text-xs text-terracotta-800 line-clamp-2 leading-relaxed">
             {location.shortDescription}
           </p>
 
-          <div className="pt-2 border-t border-stone-100 space-y-1.5 text-xs text-stone-600">
+          <div className="pt-2 border-t border-stone-100 space-y-1.5 text-xs text-kesari-650">
             <div className="flex items-center gap-2 font-medium">
               <Truck className="w-3.5 h-3.5 text-terracotta-700 shrink-0" />
               <span>{location.deliverySchedule[0]?.timeline || "Fast Delivery Available"}</span>
             </div>
             <div className="flex items-center gap-2">
-              <MapPin className="w-3.5 h-3.5 text-kesari-600 shrink-0" />
+              <MapPin className="w-3.5 h-3.5 text-terracotta-700 shrink-0" />
               <span className="line-clamp-1">
                 Areas: {location.servingAreas.slice(0, 4).join(", ")} +more
               </span>

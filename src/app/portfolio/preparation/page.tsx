@@ -2,7 +2,6 @@ import React from "react";
 import { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { Flame, CheckCircle2, ArrowRight, Layers } from "lucide-react";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { PORTFOLIO_ITEMS } from "@/data/portfolio";
 import { constructMetadata } from "@/lib/seo";
@@ -31,10 +30,10 @@ export default function PreparationPortfolioPage() {
           <span className="text-xs font-bold uppercase tracking-widest text-terracotta-700 bg-terracotta-100 px-3 py-1 rounded-full">
             {item.subtitle}
           </span>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-serif text-stone-900">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-serif text-terracotta-800">
             {item.title}
           </h1>
-          <p className="text-stone-600 text-sm sm:text-base leading-relaxed">
+          <p className="text-terracotta-800 text-sm sm:text-base leading-relaxed">
             {item.detailedStory}
           </p>
         </div>
@@ -54,7 +53,7 @@ export default function PreparationPortfolioPage() {
         {/* Step-by-Step Process */}
         {item.processSteps && (
           <div className="bg-white rounded-3xl p-6 sm:p-10 border border-stone-200 shadow-xs space-y-8">
-            <h2 className="text-2xl font-bold font-serif text-stone-900">
+            <h2 className="text-2xl font-bold font-serif text-terracotta-800">
               The 4 Sacred Kitchen Stages
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -89,7 +88,7 @@ export default function PreparationPortfolioPage() {
                 <div className="relative aspect-4/3 rounded-2xl overflow-hidden border border-stone-200 bg-stone-100">
                   <Image src={img.url} alt={img.caption} fill sizes="33vw" className="object-cover" />
                 </div>
-                <p className="text-[11px] text-stone-500 text-center">{img.caption}</p>
+                <p className="text-[11px] text-terracotta-800 text-center">{img.caption}</p>
               </div>
             ))}
           </div>

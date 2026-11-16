@@ -4,7 +4,6 @@ import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { constructMetadata } from "@/lib/seo";
 import { generateItemListSchema } from "@/lib/schema";
-import { PRODUCTS } from "@/data/products";
 import { AllProductsClient } from "./AllProductsClient";
 import { getCatalogProducts } from "@/lib/product-catalog";
 import { getCatalogCategories } from "@/lib/category-catalog";
@@ -42,7 +41,7 @@ export default async function AllProductsPage() {
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-serif text-stone-900">
             Handcrafted Traditional Gujarati Snacks
           </h1>
-          <p className="text-stone-600 text-sm sm:text-base max-w-3xl leading-relaxed">
+          <p className="text-stone-650 text-sm sm:text-base max-w-3xl leading-relaxed">
             All our delicacies are made with 100% whole wheat, pure cold-pressed oils, and traditional roasting techniques. Vacuum-sealed fresh to order for daily breakfast and overseas travel.
           </p>
         </div>
