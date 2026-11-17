@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Phone, Mail, MapPin, Clock, MessageSquare, Send, CheckCircle2 } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, MessageSquare } from "lucide-react";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { SITE_CONFIG } from "@/lib/constants";
 
@@ -14,11 +14,26 @@ export default function ContactUsPage() {
     subject: "General Inquiry",
     message: "",
   });
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsSubmitted(true);
+    const phoneNumber = SITE_CONFIG.contact.whatsapp.replace(/\D/g, "");
+    const message = [
+      "Hi Lajja's Foods, I have an inquiry.",
+      `Name: ${formData.name}`,
+      `Phone: ${formData.phone}`,
+      `Email: ${formData.email || "Not provided"}`,
+      `City: ${formData.city}`,
+      `Subject: ${formData.subject}`,
+      "",
+      "Message:",
+      formData.message,
+    ].join("\n");
+
+    window.open(
+      `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`,
+      "_blank",
+      "noopener,noreferrer"
+    );
   };
 
   return (
@@ -121,22 +136,11 @@ export default function ContactUsPage() {
                   Send Us a Message
                 </h2>
                 <p className="text-xs sm:text-sm text-kesari-700 mt-1">
-                  Fill in the details below and our kitchen team will reach out within 2 hours.
+                  Fill in the details below to continue to WhatsApp and send your inquiry directly to our team.
                 </p>
               </div>
 
-              {isSubmitted ? (
-                <div className="bg-herbal-50 border border-herbal-200 p-6 rounded-2xl text-center space-y-3">
-                  <CheckCircle2 className="w-12 h-12 text-herbal-600 mx-auto" />
-                  <h3 className="text-lg font-bold font-serif text-herbal-900">
-                    Message Received with Thanks!
-                  </h3>
-                  <p className="text-xs sm:text-sm text-stone-600 max-w-sm mx-auto">
-                    We have received your message regarding <strong>{formData.subject}</strong>. Our Vadodara kitchen coordinator will get back to you shortly at {formData.phone || formData.email}.
-                  </p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-xs font-bold uppercase text-stone-700 mb-1">
@@ -235,11 +239,10 @@ export default function ContactUsPage() {
                     type="submit"
                     className="w-full py-3.5 bg-terracotta-700 hover:bg-terracotta-800 text-white font-bold text-xs sm:text-sm rounded-xl shadow-xs transition-all flex items-center justify-center gap-2"
                   >
-                    <Send className="w-4 h-4" />
-                    <span>Submit Inquiry</span>
+                    <MessageSquare className="w-4 h-4" />
+                    <span>Continue to WhatsApp</span>
                   </button>
-                </form>
-              )}
+              </form>
             </div>
           </div>
         </div>

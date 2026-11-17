@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { 
   ShoppingBag, 
   Menu, 
@@ -241,13 +242,25 @@ export function Header() {
               </button>
 
               {/* My Account */}
-              <Link
-                href="/my-account/"
-                className="p-2 text-stone-700 hover:text-terracotta-800 rounded-full hover:bg-stone-100 transition-colors hidden sm:flex"
-                aria-label="My Account and Orders"
-              >
-                <User className="w-5 h-5" />
-              </Link>
+              <SignedOut>
+                <Link
+                  href="/sign-in/"
+                  className="p-2 text-stone-700 hover:text-terracotta-800 rounded-full hover:bg-stone-100 transition-colors"
+                  aria-label="Sign in"
+                >
+                  <User className="w-5 h-5" />
+                </Link>
+              </SignedOut>
+              <SignedIn>
+                <Link
+                  href="/my-account/"
+                  className="p-2 text-stone-700 hover:text-terracotta-800 rounded-full hover:bg-stone-100 transition-colors hidden sm:flex"
+                  aria-label="My Account and Orders"
+                >
+                  <User className="w-5 h-5" />
+                </Link>
+                <UserButton />
+              </SignedIn>
 
               {/* Cart Drawer Trigger Button */}
               <button
