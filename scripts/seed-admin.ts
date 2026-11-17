@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
+import bcrypt from "bcryptjs";
 import { getDatabase } from "../src/lib/mongodb";
-import { hashPassword } from "../src/lib/auth";
 
 dotenv.config({ path: ".env" });
 const email = process.env.ADMIN_EMAIL;
@@ -12,7 +12,7 @@ async function seedAdmin() {
   const db = await getDatabase();
   await db.collection("users").updateOne(
     { email: adminEmail.toLowerCase() },
-    { $set: { name: "Lajja Admin", email: adminEmail.toLowerCase(), passwordHash: await hashPassword(adminPassword), role: "admin", updatedAt: new Date() }, $setOnInsert: { createdAt: new Date() } },
+    { $set: { name: "Lajja Admin", email: adminEmail.toLowerCase(), passwordHash: await bcrypt.hash(adminPassword, 12), role: "admin", updatedAt: new Date() }, $setOnInsert: { createdAt: new Date() } },
     { upsert: true },
   );
   console.log("Admin user seeded.");

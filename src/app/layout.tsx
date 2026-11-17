@@ -1,3 +1,4 @@
+import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
@@ -29,13 +30,15 @@ export default function RootLayout({
         <JsonLd data={generateWebSiteSchema()} />
       </head>
       <body className="min-h-screen flex flex-col bg-[#FDFBF7] text-stone-900 selection:bg-kesari-200 selection:text-terracotta-900">
-        <Header />
-        <main className="flex-1">
-          {children}
-        </main>
-        <Footer />
-        <CartDrawer />
-        <Toast />
+        <ClerkProvider>
+          <Header />
+          <main className="flex-1">
+            {children}
+          </main>
+          <Footer />
+          <CartDrawer />
+          <Toast />
+        </ClerkProvider>
       </body>
     </html>
   );

@@ -19,7 +19,7 @@ export function Footer() {
         {/* Value Proposition Badges */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pb-12  text-green-800">
           <div className="flex items-start gap-3">
-            <div className="p-2.5 rounded-xl bg-terracotta-900/90 text-kesari-600 shrink-0">
+          <div className="p-2.5 rounded-xl border border-terracotta-800 text-terracotta-800 shrink-0">
               <Sparkles className="w-5 h-5" />
             </div>
             <div>
@@ -29,7 +29,7 @@ export function Footer() {
           </div>
 
           <div className="flex items-start gap-3">
-            <div className="p-2.5 rounded-xl bg-terracotta-900/90 text-kesari-600 shrink-0">
+           <div className="p-2.5 rounded-xl border border-terracotta-800 text-terracotta-800 shrink-0">
               <ShieldCheck className="w-5 h-5" />
             </div>
             <div>
@@ -39,7 +39,7 @@ export function Footer() {
           </div>
 
           <div className="flex items-start gap-3">
-            <div className="p-2.5 rounded-xl bg-terracotta-900/90 text-kesari-600 shrink-0">
+           <div className="p-2.5 rounded-xl border border-terracotta-800 text-terracotta-800 shrink-0">
               <Truck className="w-5 h-5" />
             </div>
             <div>
@@ -49,7 +49,7 @@ export function Footer() {
           </div>
 
           <div className="flex items-start gap-3">
-            <div className="p-2.5 rounded-xl bg-terracotta-900/90 text-kesari-600 shrink-0">
+            <div className="p-2.5 rounded-xl border border-terracotta-800 text-terracotta-800 shrink-0">
               <HeartHandshake className="w-5 h-5" />
             </div>
             <div>
