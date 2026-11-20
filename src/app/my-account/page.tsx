@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { useUser } from "@clerk/nextjs";
 import { 
   Package, 
   MapPin, 
@@ -16,6 +17,7 @@ import { Order } from "@/types/order";
 import { formatPrice, formatDate } from "@/lib/utils";
 
 export default function MyAccountPage() {
+  const { user } = useUser();
   const [orders, setOrders] = useState<Order[]>([]);
   const [isAdmin, setIsAdmin] = useState(false);
 
@@ -40,13 +42,35 @@ export default function MyAccountPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         <Breadcrumbs items={[{ name: "My Account", url: "/my-account/" }]} />
 
-        <div className="space-y-1">
-          <h1 className="text-3xl sm:text-4xl font-extrabold font-serif text-stone-900">
-            My Account & Orders
-          </h1>
-          <p className="text-xs sm:text-sm text-stone-500">
-            Manage your traditional snack orders, track courier deliveries, and update addresses.
-          </p>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="space-y-1">
+            <h1 className="text-3xl sm:text-4xl font-extrabold font-serif text-stone-900">
+              My Account & Orders
+            </h1>
+            <p className="text-xs sm:text-sm text-stone-500">
+              Manage your traditional snack orders, track courier deliveries, and update addresses.
+            </p>
+          </div>
+
+          {user && (
+            <div className="flex items-center gap-3 bg-white p-3 px-4 rounded-2xl border border-stone-200 shadow-2xs">
+              {user.imageUrl && (
+                <img
+                  src={user.imageUrl}
+                  alt={user.fullName || "User avatar"}
+                  className="w-10 h-10 rounded-full border border-stone-200 object-cover"
+                />
+              )}
+              <div className="text-left">
+                <div className="text-xs font-bold text-stone-900">
+                  {user.fullName || user.firstName || "Customer"}
+                </div>
+                <div className="text-[11px] text-stone-500 truncate max-w-[200px]">
+                  {user.primaryEmailAddress?.emailAddress}
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Shortcuts and admin tools */}
@@ -91,10 +115,10 @@ export default function MyAccountPage() {
               <User className="w-6 h-6" />
             </div>
             <div>
-              <h2 className="text-base font-bold font-serif text-stone-900">Account Details</h2>
-              <p className="text-xs text-stone-500 mt-1">Personal profile & contact preferences</p>
+              <h2 className="text-base font-bold font-serif text-stone-900">Profile & Security</h2>
+              <p className="text-xs text-stone-500 mt-1">Manage email, password & authentication</p>
               <span className="inline-block mt-3 text-xs font-bold text-terracotta-700">
-                Edit Profile →
+                Manage Profile →
               </span>
             </div>
           </Link>

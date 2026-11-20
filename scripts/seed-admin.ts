@@ -3,22 +3,51 @@ import bcrypt from "bcryptjs";
 import { getDatabase } from "../src/lib/mongodb";
 
 dotenv.config({ path: ".env" });
-const email = process.env.ADMIN_EMAIL;
-const password = process.env.ADMIN_PASSWORD;
-if (!email || !password) throw new Error("Set ADMIN_EMAIL and ADMIN_PASSWORD in .env.");
-const adminEmail = email;
-const adminPassword = password;
+
+const adminEmails = [
+  process.env.ADMIN_EMAIL,
+  process.env.ADMIN_EMAILS,
+  "bhattlakshit200@gmail.com",
+  "lajjas123@gmail.com",
+]
+  .flatMap((val) => (val ? val.split(",") : []))
+  .map((e) => e.trim().toLowerCase())
+  .filter(Boolean);
+
+const uniqueAdminEmails = Array.from(new Set(adminEmails));
+const adminPassword = process.env.ADMIN_PASSWORD || "lajjas123";
+
 async function seedAdmin() {
   const db = await getDatabase();
-  await db.collection("users").updateOne(
-    { email: adminEmail.toLowerCase() },
-    { $set: { name: "Lajja Admin", email: adminEmail.toLowerCase(), passwordHash: await bcrypt.hash(adminPassword, 12), role: "admin", updatedAt: new Date() }, $setOnInsert: { createdAt: new Date() } },
-    { upsert: true },
-  );
-  console.log("Admin user seeded.");
+  const users = db.collection("users");
+
+  for (const email of uniqueAdminEmails) {
+    const isOwner = email.includes("bhatt");
+    await users.updateOne(
+      { email },
+      {
+        $set: {
+          name: isOwner ? "Lakshit Bhatt (Admin)" : "Lajja Admin",
+          email,
+          role: "admin",
+          updatedAt: new Date(),
+        },
+        $setOnInsert: {
+          createdAt: new Date(),
+          passwordHash: await bcrypt.hash(adminPassword, 12),
+        },
+      },
+      { upsert: true }
+    );
+    console.log(`Admin user seeded / updated: ${email}`);
+  }
 }
 
-seedAdmin().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+seedAdmin()
+  .then(() => {
+    process.exit(0);
+  })
+  .catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });

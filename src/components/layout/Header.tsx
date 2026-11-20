@@ -12,7 +12,9 @@ import {
   Phone, 
   User, 
   Sparkles,
-  MapPin
+  MapPin,
+  Package,
+  ShieldCheck
 } from "lucide-react";
 import { NAV_LINKS, SITE_CONFIG } from "@/lib/constants";
 import { MegaMenu } from "./MegaMenu";
@@ -241,7 +243,7 @@ export function Header() {
                 <Search className="w-5 h-5" />
               </button>
 
-              {/* My Account */}
+              {/* My Account - Unified Single Account Menu */}
               <Show when="signed-out">
                 <Link
                   href="/sign-in/"
@@ -252,14 +254,38 @@ export function Header() {
                 </Link>
               </Show>
               <Show when="signed-in">
-                <Link
-                  href="/my-account/"
-                  className="p-2 text-stone-700 hover:text-terracotta-800 rounded-full hover:bg-stone-100 transition-colors hidden sm:flex"
-                  aria-label="My Account and Orders"
-                >
-                  <User className="w-5 h-5" />
-                </Link>
-                <UserButton />
+                <div className="flex items-center">
+                  <UserButton
+                    appearance={{
+                      elements: {
+                        avatarBox: "w-9 h-9 border border-stone-200 hover:border-terracotta-500 transition-colors shadow-2xs",
+                      },
+                    }}
+                  >
+                    <UserButton.MenuItems>
+                      <UserButton.Link
+                        label="My Account & Orders"
+                        href="/my-account/"
+                        labelIcon={<User className="w-4 h-4" />}
+                      />
+                      <UserButton.Link
+                        label="Order Tracking"
+                        href="/my-account/orders/"
+                        labelIcon={<Package className="w-4 h-4" />}
+                      />
+                      <UserButton.Link
+                        label="Delivery Addresses"
+                        href="/my-account/addresses/"
+                        labelIcon={<MapPin className="w-4 h-4" />}
+                      />
+                      <UserButton.Link
+                        label="Admin Panel"
+                        href="/admin/"
+                        labelIcon={<ShieldCheck className="w-4 h-4 text-[#1f5a3d]" />}
+                      />
+                    </UserButton.MenuItems>
+                  </UserButton>
+                </div>
               </Show>
 
               {/* Cart Drawer Trigger Button */}

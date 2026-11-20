@@ -30,8 +30,13 @@ yarn-error.log*
 # vercel
 .vercel
 
+# VS Code
+.vscode/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
 .vscode/mcp.json
 
+# Local activation script
+scripts/activate-skills.ps1
