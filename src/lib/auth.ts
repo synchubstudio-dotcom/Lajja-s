@@ -9,6 +9,23 @@ export type SessionUser = {
   role: "user" | "admin";
 };
 
+const DEFAULT_ADMIN_EMAILS = [
+  "bhattlakshit200@gmail.com",
+  "lajjas123@gmail.com",
+];
+
+function getAdminEmails(): string[] {
+  const configured = [
+    process.env.ADMIN_EMAIL,
+    process.env.ADMIN_EMAILS,
+    ...DEFAULT_ADMIN_EMAILS,
+  ];
+  return configured
+    .flatMap((val) => (val ? val.split(",") : []))
+    .map((e) => e.trim().toLowerCase())
+    .filter(Boolean);
+}
+
 export async function getSession(): Promise<SessionUser | null> {
   const { userId } = await auth();
   if (!userId) return null;
@@ -28,7 +45,10 @@ export async function getSession(): Promise<SessionUser | null> {
     (await users.findOne({ clerkUserId: userId })) ||
     (await users.findOne({ email }));
   const userIdInDatabase = existingUser?._id ?? new ObjectId();
-  const role = existingUser?.role === "admin" ? "admin" : "user";
+  
+  const adminEmails = getAdminEmails();
+  const isAdmin = existingUser?.role === "admin" || adminEmails.includes(email);
+  const role: "user" | "admin" = isAdmin ? "admin" : "user";
   const now = new Date();
 
   await users.updateOne(

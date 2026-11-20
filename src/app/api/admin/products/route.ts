@@ -29,48 +29,64 @@ export async function GET() {
 export async function POST(request: Request) {
   if (!(await requireAdmin())) return NextResponse.json({ message: "Forbidden" }, { status: 403 });
   try {
-    const product = await request.json();
-    if (!product.name || !product.slug || !product.categorySlug) return NextResponse.json({ message: "Name, slug, and category are required." }, { status: 400 });
+    const raw = await request.json();
+    const { _id, id, ...product } = raw;
+    delete (product as Record<string, unknown>)._id;
+    delete (product as Record<string, unknown>).id;
+
+    if (!product.name || !product.slug || !product.categorySlug) {
+      return NextResponse.json({ message: "Name, slug, and category are required." }, { status: 400 });
+    }
     const result = await (await getDatabase()).collection("products").insertOne({ ...product, _id: new ObjectId(), updatedAt: new Date() });
     return NextResponse.json({ id: result.insertedId.toString() });
   } catch (error) {
     console.error("Admin product creation failed:", error);
-    return NextResponse.json({ message: "Product could not be added. Check the MongoDB connection and product data." }, { status: 500 });
+    return NextResponse.json({ message: error instanceof Error ? error.message : "Product could not be added. Check the MongoDB connection and product data." }, { status: 500 });
   }
 }
 
 export async function PUT(request: Request) {
   if (!(await requireAdmin())) return NextResponse.json({ message: "Forbidden" }, { status: 403 });
-  const { id, ...changes } = await request.json();
-  const productId = typeof id === "string" ? id : id?.$oid;
-  if (!productId) return NextResponse.json({ message: "Product id is required." }, { status: 400 });
   try {
-    const filter = ObjectId.isValid(productId)
-      ? { _id: new ObjectId(productId) }
-      : { id: productId };
+    const body = await request.json();
+    const rawId = body.id || body._id;
+    const productId = typeof rawId === "string" ? rawId : rawId?.$oid ? String(rawId.$oid) : "";
+    if (!productId) return NextResponse.json({ message: "Product id is required." }, { status: 400 });
+
+    const changes = { ...body };
+    delete changes.id;
+    delete changes._id;
+
+    const filter = ObjectId.isValid(productId) && productId.length === 24
+      ? { $or: [{ _id: new ObjectId(productId) }, { id: productId }, { slug: productId }] }
+      : { $or: [{ id: productId }, { slug: productId }] };
+
     const result = await (await getDatabase()).collection("products").updateOne(filter, { $set: { ...changes, updatedAt: new Date() } });
     if (!result.matchedCount) return NextResponse.json({ message: "Product not found." }, { status: 404 });
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Admin product update failed:", error);
-    return NextResponse.json({ message: "Product could not be updated. Check the MongoDB connection." }, { status: 500 });
+    return NextResponse.json({ message: error instanceof Error ? error.message : "Product could not be updated. Check the MongoDB connection." }, { status: 500 });
   }
 }
 
 export async function DELETE(request: Request) {
   if (!(await requireAdmin())) return NextResponse.json({ message: "Forbidden" }, { status: 403 });
-  const { id } = await request.json();
-  const productId = typeof id === "string" ? id : id?.$oid;
-  if (!productId) return NextResponse.json({ message: "Product id is required." }, { status: 400 });
   try {
-    const filter = ObjectId.isValid(productId)
-      ? { _id: new ObjectId(productId) }
-      : { id: productId };
+    const body = await request.json();
+    const rawId = body.id || body._id;
+    const productId = typeof rawId === "string" ? rawId : rawId?.$oid ? String(rawId.$oid) : "";
+    if (!productId) return NextResponse.json({ message: "Product id is required." }, { status: 400 });
+
+    const filter = ObjectId.isValid(productId) && productId.length === 24
+      ? { $or: [{ _id: new ObjectId(productId) }, { id: productId }, { slug: productId }] }
+      : { $or: [{ id: productId }, { slug: productId }] };
+
     const result = await (await getDatabase()).collection("products").deleteOne(filter);
     if (!result.deletedCount) return NextResponse.json({ message: "Product not found." }, { status: 404 });
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Admin product deletion failed:", error);
-    return NextResponse.json({ message: "Product could not be deleted. Check the MongoDB connection." }, { status: 500 });
+    return NextResponse.json({ message: error instanceof Error ? error.message : "Product could not be deleted. Check the MongoDB connection." }, { status: 500 });
   }
 }
