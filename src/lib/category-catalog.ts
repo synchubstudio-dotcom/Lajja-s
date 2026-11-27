@@ -2,8 +2,14 @@ import { CATEGORIES } from "@/data/categories";
 import { getDatabase } from "@/lib/mongodb";
 import { SITE_CONFIG } from "@/lib/constants";
 import { Category } from "@/types/category";
+import { cache } from "react";
 
 const CATEGORY_INITIALIZATION_ID = "categories";
+
+// In-memory cache with 60s TTL
+let cachedCategories: Category[] | null = null;
+let lastCategoryFetchTime = 0;
+const CACHE_TTL_MS = 60 * 1000;
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
@@ -66,49 +72,60 @@ export function normalizeCategoryRecord(value: unknown): Category {
   };
 }
 
-export async function getCatalogCategories(): Promise<Category[]> {
+export const getCatalogCategories = cache(async function getCatalogCategories(): Promise<Category[]> {
+  const now = Date.now();
+  if (cachedCategories && now - lastCategoryFetchTime < CACHE_TTL_MS) {
+    return cachedCategories;
+  }
+
   let categories: Array<Record<string, unknown>>;
   try {
     const database = await getDatabase();
     const collection = database.collection("categories");
     categories = await collection.find().sort({ name: 1 }).toArray();
-    const initialization = database.collection<{ _id: string; initializedAt?: Date }>("catalog_metadata");
-    const initialized = await initialization.findOne({ _id: CATEGORY_INITIALIZATION_ID });
 
-    if (categories.length > 0) {
+    if (categories.length === 0) {
+      const initialization = database.collection<{ _id: string; initializedAt?: Date }>("catalog_metadata");
+      const initialized = await initialization.findOne({ _id: CATEGORY_INITIALIZATION_ID });
+
       if (!initialized) {
-        await initialization.updateOne(
+        const claim = await initialization.updateOne(
           { _id: CATEGORY_INITIALIZATION_ID },
           { $setOnInsert: { initializedAt: new Date() } },
           { upsert: true }
         );
-      }
-    } else if (!initialized) {
-      const claim = await initialization.updateOne(
-        { _id: CATEGORY_INITIALIZATION_ID },
-        { $setOnInsert: { initializedAt: new Date() } },
-        { upsert: true }
-      );
-      if (claim.upsertedCount === 1) {
-        try {
-          await collection.insertMany(
-            CATEGORIES.map((category) => ({
-              ...normalizeCategoryRecord(category),
-              createdAt: new Date(),
-              updatedAt: new Date(),
-            }))
-          );
-          categories = await collection.find().sort({ name: 1 }).toArray();
-        } catch (error) {
-          await initialization.deleteOne({ _id: CATEGORY_INITIALIZATION_ID });
-          throw error;
+        if (claim.upsertedCount === 1) {
+          try {
+            await collection.insertMany(
+              CATEGORIES.map((category) => ({
+                ...normalizeCategoryRecord(category),
+                createdAt: new Date(),
+                updatedAt: new Date(),
+              }))
+            );
+            categories = await collection.find().sort({ name: 1 }).toArray();
+          } catch (error) {
+            await initialization.deleteOne({ _id: CATEGORY_INITIALIZATION_ID });
+            throw error;
+          }
         }
       }
     }
+
+    if (categories.length > 0) {
+      cachedCategories = categories.map(({ _id, ...category }) => normalizeCategoryRecord(category));
+      lastCategoryFetchTime = now;
+      return cachedCategories;
+    }
   } catch (error) {
     console.warn("Using the static category catalog because MongoDB is unavailable:", error);
-    return CATEGORIES.map(normalizeCategoryRecord);
+    if (cachedCategories) return cachedCategories;
   }
 
-  return categories.map(({ _id, ...category }) => normalizeCategoryRecord(category));
+  return CATEGORIES.map(normalizeCategoryRecord);
+});
+
+export function invalidateCategoryCatalogCache() {
+  cachedCategories = null;
+  lastCategoryFetchTime = 0;
 }

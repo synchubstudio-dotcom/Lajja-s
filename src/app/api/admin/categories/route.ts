@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { ObjectId } from "mongodb";
 import { getSession } from "@/lib/auth";
 import { getDatabase } from "@/lib/mongodb";
-import { getCatalogCategories, normalizeCategoryRecord } from "@/lib/category-catalog";
+import { getCatalogCategories, normalizeCategoryRecord, invalidateCategoryCatalogCache } from "@/lib/category-catalog";
 import { SITE_CONFIG } from "@/lib/constants";
 import { Category } from "@/types/category";
 
@@ -31,8 +31,10 @@ function isValidSlug(slug: string) {
 }
 
 function revalidateCategoryPages(...slugs: string[]) {
+  invalidateCategoryCatalogCache();
   for (const slug of new Set(slugs.filter(Boolean))) revalidatePath(`/${slug}/`);
   revalidatePath("/", "page");
+  revalidatePath("/products/all-products/", "page");
   revalidatePath("/sitemap.xml");
 }
 

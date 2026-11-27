@@ -24,7 +24,7 @@ import { generateProductSchema, generateFAQSchema } from "@/lib/schema";
 import { getCatalogProducts } from "@/lib/product-catalog";
 import { ProductDetailsClient } from "./ProductDetailsClient";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 interface ProductPageProps {
   params: Promise<{
