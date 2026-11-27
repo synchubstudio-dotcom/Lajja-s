@@ -65,3 +65,66 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #b8a38c;
 }
+
+/* Lajja's Custom Brand Animations */
+@keyframes lajjas-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes lajjas-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.95;
+  }
+}
+
+@keyframes lajjas-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes lajjas-progress {
+  0% {
+    width: 0%;
+    left: 0%;
+  }
+  50% {
+    width: 70%;
+    left: 20%;
+  }
+  100% {
+    width: 100%;
+    left: 100%;
+  }
+}
+
+.animate-lajjas-spin {
+  animation: lajjas-spin 2.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.animate-lajjas-pulse {
+  animation: lajjas-pulse 2.2s ease-in-out infinite;
+}
+
+.animate-lajjas-shimmer {
+  background-size: 200% auto;
+  animation: lajjas-shimmer 2.8s linear infinite;
+}
+
+.animate-lajjas-progress {
+  animation: lajjas-progress 1.6s ease-in-out infinite;
+}
+

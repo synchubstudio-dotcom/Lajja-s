@@ -8,7 +8,7 @@ import { AllProductsClient } from "./AllProductsClient";
 import { getCatalogProducts } from "@/lib/product-catalog";
 import { getCatalogCategories } from "@/lib/category-catalog";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export const metadata: Metadata = constructMetadata({
   title: "All Products | Buy Authentic Gujarati Snacks Online",

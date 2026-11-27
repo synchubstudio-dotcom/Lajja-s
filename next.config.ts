@@ -3,8 +3,11 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   trailingSlash: true,
+  compress: true,
+  poweredByHeader: false,
   images: {
     formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 2592000, // 30 days image cache
     remotePatterns: [
       {
         protocol: "https",
@@ -23,6 +26,9 @@ const nextConfig: NextConfig = {
         hostname: "res.cloudinary.com",
       },
     ],
+  },
+  experimental: {
+    optimizePackageImports: ["lucide-react", "clsx", "tailwind-merge"],
   },
   async headers() {
     return [

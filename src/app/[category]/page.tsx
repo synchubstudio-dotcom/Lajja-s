@@ -12,7 +12,7 @@ import { generateItemListSchema, generateFAQSchema } from "@/lib/schema";
 import { getCatalogProducts } from "@/lib/product-catalog";
 import { getCatalogCategories } from "@/lib/category-catalog";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 export const dynamicParams = true;
 
 interface CategoryPageProps {

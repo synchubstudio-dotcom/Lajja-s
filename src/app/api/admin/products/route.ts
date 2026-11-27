@@ -1,8 +1,19 @@
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 import { ObjectId } from "mongodb";
 import { getSession } from "@/lib/auth";
 import { getDatabase } from "@/lib/mongodb";
 import { PRODUCTS } from "@/data/products";
+import { invalidateProductCatalogCache } from "@/lib/product-catalog";
+
+function purgeProductCaches(slug?: string, categorySlug?: string) {
+  invalidateProductCatalogCache();
+  revalidatePath("/", "page");
+  revalidatePath("/products/all-products/", "page");
+  if (categorySlug) revalidatePath(`/${categorySlug}/`);
+  if (categorySlug && slug) revalidatePath(`/${categorySlug}/${slug}/`);
+  revalidatePath("/sitemap.xml");
+}
 
 async function requireAdmin() {
   const session = await getSession();
@@ -38,6 +49,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ message: "Name, slug, and category are required." }, { status: 400 });
     }
     const result = await (await getDatabase()).collection("products").insertOne({ ...product, _id: new ObjectId(), updatedAt: new Date() });
+    purgeProductCaches(product.slug as string, product.categorySlug as string);
     return NextResponse.json({ id: result.insertedId.toString() });
   } catch (error) {
     console.error("Admin product creation failed:", error);
@@ -63,6 +75,7 @@ export async function PUT(request: Request) {
 
     const result = await (await getDatabase()).collection("products").updateOne(filter, { $set: { ...changes, updatedAt: new Date() } });
     if (!result.matchedCount) return NextResponse.json({ message: "Product not found." }, { status: 404 });
+    purgeProductCaches(changes.slug as string, changes.categorySlug as string);
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Admin product update failed:", error);
@@ -84,6 +97,7 @@ export async function DELETE(request: Request) {
 
     const result = await (await getDatabase()).collection("products").deleteOne(filter);
     if (!result.deletedCount) return NextResponse.json({ message: "Product not found." }, { status: 404 });
+    purgeProductCaches();
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Admin product deletion failed:", error);

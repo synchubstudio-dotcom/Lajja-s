@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   ArrowRight,
 } from "lucide-react";
@@ -10,7 +11,7 @@ import { FAQS } from "@/data/faqs";
 import { generateFAQSchema } from "@/lib/schema";
 import { getCatalogCategories } from "@/lib/category-catalog";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 export default async function HomePage() {
   const categories = await getCatalogCategories();
 
@@ -66,12 +67,14 @@ export default async function HomePage() {
                 href={`/${category.slug}/`}
                 className="group relative overflow-hidden rounded-2xl border border-[#0f681b] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#805612] hover:shadow-xl hover:shadow-stone-900/10"
               >
-                <div className="relative overflow-hidden bg-[#f5efe4]">
-                  <img
+                <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#f5efe4]">
+                  <Image
                     src={category.heroImage}
                     alt={category.name}
-                    loading={index < 4 ? "eager" : "lazy"}
-                    className="aspect-[4/3] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                    fill
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                    priority={index < 2}
+                    className="object-cover transition-transform duration-500 ease-out group-hover:scale-110"
                   />
 
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-transparent opacity-70" />
